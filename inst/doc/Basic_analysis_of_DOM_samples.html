@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Introduction</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Introduction</h1>
+
+<p>staRdom is a package for R [@R_Core_Team_2018] to analyse fluorescence and absorbance data of dissolved organic matter (DOM). The important features are:</p>
+
+<ul>
+<li>correcting excitation-emission-matrices (EEM, @Murphy_2013, @Massicotte_2018)</li>
+<li>calculating fluorescence peaks and indices (@Massicotte_2018)
+
+<ul>
+<li>biological index (bix, @Huguet_2009)</li>
+<li>so-called Coble-peaks (b, t, a,   m, c, @Coble_1996)</li>
+<li>fluorescence index (fi, @McKnight_2001)</li>
+<li>humification index (hix, @Ohno_2002)</li>
+</ul></li>
+<li>absorbance slope parameters (a254, a300, E2:E3, E4:E6, S275-295, S350-400, S300-700, SR, @Helms_2008, @Twardowski_2004)</li>
+<li>PARAFAC/CANDECOMP analysis can separate the components of the EEMs (@Murphy_2013, @Helwig_2017).</li>
+</ul>
+
+<p>staRdom was developed and is maintained at <a href="http://www.wcl.ac.at/index.php/en/">WasserCluster Lunz</a> and the <a href="http://www.boku.ac.at/">University of Natural Resources and Life Sciences, Vienna</a>. I want to thank Daniel Graeber for his support and for sharing his experience and Renata Pinto and Stefan Preiner for testing the scripts.</p>
+
+<p>staRdom comes with an Rmd template where you can start your analysis with example data and add your personal data and parameters whenever you feel ready. We recommend to go interactively through this template while reading this vignette to get an overview of what is possible.
+As an advanced user, you can just include the functions in whatever calculations you want to do. The vignette describes the template. If you are interested in the specific functions please refer to the help in R, which can be accessed by <code>help(function)</code> of pressing F1 while the cursor is in the function name in the code.</p>
+
+<p>If you are a beginner in R you may find some help at <a href="https://www.rstudio.com/online-learning/#r-programming"></a>, <a href="https://www.computerworld.com/article/2497143/business-intelligence/business-intelligence-beginner-s-guide-to-r-introduction.html">The Beginner&#39;s Guide to R</a> by Computerworld Magazine or below.</p>
+
+<p>The package is available on CRAN and can be installed via <code>install.packages(&quot;staRdom&quot;)</code>.</p>
+
+<p>Later in the vignette there is also a chapter about troubleshooting. If you experience problems you may find a useful solution there.</p>
+
+<p>The description of the PARAFAC analysis can be found in the <a href="PARAFAC_analysis_of_EEM.html">vignette for PARAFAC analysis</a>.</p>
+
+<h1>Starting the analysis with the template</h1>
+
+<p>The template is accessible with the commands <code>eem_easy()</code> or if that does not work <code>file.edit(system.file(&quot;EEM_simple_analysis.Rmd&quot;, package = &quot;staRdom&quot;))</code>. You can save this file if you want to preserve it. The example data is saved within the package structure and you can find the containing folders with the commands <code>system.file(package = &quot;staRdom&quot;)</code>. Raw data is in the sub-folder &ldquo;extdata&rdquo;.</p>
+
+<h2>Output parameters</h2>
+
+<p>On top of the template there are the header parameters necessary to create a report with knitr. You can change them as you wish (e.g. author, title). It is possible to create reports in other file formats. Please find details at <a href="https://rmarkdown.rstudio.com/lesson-9.html">https://rmarkdown.rstudio.com/lesson-9.html</a>.</p>
+
+<p>The directory your generated files are saved in is set by output_dir at line 7. It is important that you keep the ; at the end of the line. Folders are delimited by &ldquo;/&rdquo;. In RStudio, pressing the tab key while the cursor is in the path can reveal possible folders on your drive.</p>
+
+<p>In case you want to run the code chunk-wise, you need to specify the output folder on line 45.</p>
+
+<pre><code class="r"># Set the directory where all output files are put in.
+# The directory is automatically created if it does not exist.
+output_dir = &quot;C:/some_folder/another_folder&quot; # e.g. output_dir = &quot;C:/some_folder/output/&quot;
+</code></pre>
+
+<h2>Input parameters</h2>
+
+<p>Please be sure to have similarly named samples in fluorometer data, photometer data and meta data, as it is very often the reason for a non working analysis.</p>
+
+<h3>Fluorometer data (EEM)</h3>
+
+<p>The parameter sample_dir specifies the directory where your data files from the fluorometer are. They have to be a text format (Cary Eclipse .csv files, Aqualog .dat files, Shimadzu .TXT files, Fluoromax-4 .dat files) (details at <a href="https://www.rdocumentation.org/packages/eemR/versions/0.1.5/topics/eem_read">eem_read()</a>). Samples can be stored in subfolders as well. Please be sure, that your file names are unique. File names must not contain &ldquo; &rdquo; (space) or &ldquo;-&rdquo; (minus) or start with a number.</p>
+
+<pre><code class="r">### Directory containing EEM data ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Set the directory with your sample files. Please see eem_read() help for details on file formats.
+# Sub folders are read in and are considered different sample sets.
+# Import is done with eem.read() (package eemR), please see details there.
+# The template refers to data coming with the package. Please use your data
+# by setting the path to your files!
+sample_dir = &quot;C:/some_folder/input/fluor/&quot; # e.g. sample_dir = &quot;C:/some_folder/input/fluor/&quot;
+</code></pre>
+
+<h3>Photometer data (absorbance)</h3>
+
+<p>Absorbance data needed for inner-filter-effect correction and the calculation of the slope parameters is taken from the folder specified with <code>absorbance_dir</code>. The filenames must be identical to the EEM files to link results from one distinct sample. Please be sure, that your file names are unique. File names must not contain &ldquo; &rdquo; (space) or &ldquo;-&rdquo; (minus) or start with a number. For the calculations the cuvette length (in cm) used in the photometer has to be set. Furthermore, you can specify the cell separator and decimal point of you data files.</p>
+
+<pre><code class="r">### Absorbance data ###
+#~~~~~~~~~~~~~~~~~~~~~#
+# Absorbance data is read from *.TXT or *.CSV files.
+# Either a directory containing one or more files can be named or a single file containing all samples.
+# Absorbance data is used for inner-filter-effect correction and calculation of the slope parameters.
+# Those steps can be skipped but keep in mind it is important for a profound analysis!
+#
+# path of adsorbance data as directory or single file, sub folders are not read:
+absorbance_dir = &quot;C:/some_folder/input/absorbance/&quot; # e.g. absorbance_dir = &quot;C:/some_folder/input/absorbance/&quot;
+
+# Cuvette length in cm that was used in absorbance measurement.
+# If it is set to &quot;meta&quot; data from the metadata table is used (details see below).
+absorbance_cuv_len = 5 # e.g. absorbance_cuv_len = 5
+
+# separator and decimal point of absorbance data tables (tab is coded as &quot;\t&quot;)
+abs_sep_dec = c(&quot;,&quot;,&quot;.&quot;) # e.g. abs_sep_dec = c(&quot;\t&quot;,&quot;.&quot;)
+</code></pre>
+
+<h3>Meta data</h3>
+
+<p>In case your samples are diverse and you need differing parameters you can set distinct dilution factors, photometer cuvette lengths and raman areas in a table for each sample. You can skip that if your dilution factors and your cuvette lengths are similar and you used blank samples for calculating the raman area. Furthermore, you can specify the cell separator and decimal point of you data files. If your values are identic for all samples you can skip that and add the numbers as described below.</p>
+
+<pre><code class="r">### Meta data ###
+#~~~~~~~~~~~~~~~#
+# Adding a table with meta data is OPTIONAL!
+# The table can contain dilution factors, cuvette lengths of
+# the photometer and absorbance cuvette lengths and is intended
+# for cases where different values should be used for different
+# samples. Each column can be used optionally.
+
+# read table with metadata as *.TXT or *.CSV
+# either a path or FALSE if no metadata file is used.
+metadata = system.file(&quot;extdata/metatable.csv&quot;,package = &quot;staRdom&quot;) # e.g. metadata = &quot;C:/some_folder/input/metatable.csv&quot;
+
+# separator and decimal point of metadata table (&quot;\t&quot; is for tab).
+meta_sep_dec = c(&quot; &quot;,&quot;.&quot;) # e.g. meta_sep_dec = c(&quot;\t&quot;,&quot;.&quot;)
+
+### Meta data: names of columns ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# column with sample names
+col_samples = &quot;sample&quot;
+
+# if you want to use dilution factors (e.g. 10 if 1 part sample and 9 parts solvent) from the meta data table, state the name 
+# of the column containing the dilution data and set dilution = &quot;meta&quot; (below)
+col_dilution = &quot;dilution&quot;
+
+# if you want to use the cuvette length (in cm) for the absorbance from the meta data table,
+# state the name of the column containing the cuvette lengths and set absorbance_cuv_len = &quot;meta&quot; (below)
+col_cuv_len = &quot;cuv_len&quot;
+
+# if you want to use the raman area (under the curve) data from the meta data table, state the name 
+# of the column containing the raman areas and set raman_normalisation = &quot;meta&quot; (below)
+col_raman_area = &quot;raman&quot;
+</code></pre>
+
+<h2>Write out results and plots</h2>
+
+<h3>Results table</h3>
+
+<p>If you want to export your picked peaks and slope parameters as a table, set the parameter below <code>TRUE</code>. Exporting XLS files needs a properly configured Java environment. If any problems are encountered, a CSV is written to your output directory instead and can be opened with spreadsheet software like MS Excel as well. Furthermore, you can specify the cell separator and decimal point of you data files. </p>
+
+<pre><code class="r">### Table output ###
+#~~~~~~~~~~~~~~~~~~#
+# Write a table with peaks and slope parameters.
+# Written as xls or, in case of missing java environment as csv.
+output_xls = TRUE # e.g. TRUE
+
+# In case of csv export you can define the separator and the decimal point here.
+out_sep_dec = c(&quot;\t&quot;,&quot;.&quot;) # e.g. out_sep_dec = c(&quot;\t&quot;,&quot;.&quot;)
+</code></pre>
+
+<h3>Plots</h3>
+
+<p>The script offers several options for exporting plots. The parameter <code>scale_col</code> defines if the colour range of all plots is synchronised. If you want to compare different samples, it is easier if the colour code has the same range. Weak peaks in samples with lower DOM than other samples can be found easier if the colours are not synchronised.</p>
+
+<p><code>output_overview_png</code> states whether overview plots containing a number of samples (<code>overview_number</code>) are saved in the output directory and <code>output_single_png</code> is the parameter if you want to export single PNGs from each sample.</p>
+
+<p>With the parameters <code>overview</code> and <code>single_plots</code> these plots can be included in the report.</p>
+
+<pre><code class="r">### Plot settings PNG ###
+#~~~~~~~~~~~~~~~~~~~~~~~#
+# The scaling of the different sample plots can be chosen.
+# Either all samples are coloured according to the range of the
+# complete sample set (TRUE) or each plot is scaled separately (FALSE).
+scale_col = FALSE # e.g. TRUE
+
+# State whether you want pngs of the single EEM spectra written in your output directory
+output_single_png = FALSE # e.g. TRUE
+
+## State whether you want pngs of multiple EEM spectra written in your output directory
+output_overview_png = FALSE # e.g. TRUE
+
+## number of EEM spectra plottet in each overview image
+overview_number = 6 # e.g. 6
+
+### Plot settings report ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# This block defines which plots are included in the report.
+#
+# Add plots with several EEM samples per plot. 
+# The number per plot is defined by overview_number above.
+overview = TRUE # e.g. TRUE
+
+# State whether you want plots from single EEM spectra in the report.
+single_plots = FALSE # e.g. TRUE
+</code></pre>
+
+<h2>Correction of EEM data</h2>
+
+<p>Raw data from fluorometers bears several shortcomings. @Murphy_2013 addressed several ways of data correction that are used in the template. Depending on your data available some corrections cannot be done. Corrections can be necessary and can help you focus on certain aspects. But depending on your aim they might not be necessary. @Bro_2003 offer additional information on correction of EEM data.</p>
+
+<h3>Dilution</h3>
+
+<p>If samples were diluted before analysis the dilution factor can be set here and the sample will be accordingly corrected. As an example a dilution factor of 10 means a 1:10 dilution (1 part sample and 9 parts milliq). By setting <code>dilution = &quot;meta&quot;</code>, data from the meta table is taken and each sample can be diluted differently.</p>
+
+<pre><code class="r">### Correction of diluted samples ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Set a dilution factor if your sample was diluted.
+# All samples are multiplied with this factor.
+# Please use a meta table (above) if your dilutions are differing
+# 1 for no dilution, 10 for dilution 1:10 (1 part sample and 9
+# parts milliq), &quot;meta&quot; for data from meta table
+dilution = &quot;meta&quot; # e.g. 1
+</code></pre>
+
+<h3>EEM range reduction</h3>
+
+<p>EEM data can be cut in both dimensions. Peaks are calculated before the reduction. Cut ranges are set with vectors containing the upper and lower limits: <code>c(lower,upper)</code>. If you want to avoid any cutting, set the vectors to <code>c(0,Inf)</code>. <code>Inf</code> means infinity, so the script keeps data from 0 to infinity. The script also allows to cut all samples to the size of the sample with the shortest range which is neccessary if you want to perform a PARAFAC analysis.</p>
+
+<pre><code class="r">### Cut data to certain range ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Set a vector with range of wavelengths to be plotted and saved.
+# Peak picking is done before range reduction.
+# Emission wavelength:
+em_range = c(0,Inf) # e.g. c(300,500), c(0,Inf) to use everything
+
+# Excitation wavelength:
+ex_range = c(0,Inf) # e.g. c(300,500), c(0,Inf) to use everything
+
+# Cut all samples to fit largest range available in all samples
+cut_range_to_smallest = FALSE # e.g. FALSE
+</code></pre>
+
+<h3>Blank correction</h3>
+
+<p>Blank samples are data from measuring simple milli-Q. Systematic biases can be removed by substracting the blank sample from each sample and the raman normalisation factor is calculated from blanks. The blank sample has to contain nano, miliq, milliq, mq or blank (cases are ignored) in the file name in the same directory as the samples that are corrected with the certain blank. Multiple blanks in one (sub)folder are averaged. It has to be measured with each sample set (e.g. once a day) [@Murphy_2013].</p>
+
+<pre><code class="r">### Blank correction ###
+#~~~~~~~~~~~~~~~~~~~~~~#
+# A blank sample is substracted from each sample. Blank samples have to be
+# in the same (sub)folder as the EEM samples. So different blanks are used
+# for different subsets. The file names of the blanks have to contain nano, 
+# miliq, milliq, mq or blank (cases are ignored). Other samples must not 
+# contain these words in their names respectively!
+blank_correction = FALSE # e.g. FALSE
+</code></pre>
+
+<h3>Correct inner filter effects</h3>
+
+<p>Per sample absorbance data has to be measured to use the inner-filter-effects correction described in @Kothawala_2013. You can define if you want this step to be done here. Absorbance data must be available to do this step.</p>
+
+<pre><code class="r">### Inner filter effect correction ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Inner filter effects are corrected. Absorbance data is needed. File or column names
+# of the absorbance data have to resamble file names of the EEM data.
+ife_correction = TRUE # e.g. FALSE
+</code></pre>
+
+<h3>Remove and interpolate scattering</h3>
+
+<p>Diagonal scatter peaks hinder the analysis of EEM data as they usually are much greater than peaks from DOM. They are partly removed by removing the blank sample as described above. Diagonal peaks are called Rayleigh and Raman peaks of first and second order. @Senesi_1990 @2006 and @Coble_1990 offer additional information.</p>
+
+<p>The width of the removed scatter slot can be determined. Make sure not to loose too much data while still removing the whole peak. If you use the interpolation below, a remaining diagonal peak hints at insufficient width.</p>
+
+<p>@Bahram_2006 and @Zepp_2004 suggest an interpolation of the removed scattering and offer a description.</p>
+
+<pre><code class="r">### Remove scattering and interpolate missing data ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Scattering is removed from the EEM spectra.
+remove_scatter &lt;- c() # Please leave that as it is ;-)
+
+# remove Raman scatter order 1
+remove_scatter[&quot;raman1&quot;] = TRUE # e.g. TRUE
+
+# remove Raman scatter order 2 
+remove_scatter[&quot;raman2&quot;] = TRUE # e.g. TRUE
+
+# remove Rayleigh scatter order 1 
+remove_scatter[&quot;rayleigh1&quot;] = TRUE # e.g. TRUE
+
+# remove Rayleigh scatter order 2
+remove_scatter[&quot;rayleigh2&quot;] = TRUE # e.g. TRUE
+
+# Set the width of removed scatter slot (usually 10 to 16).
+# If you can still see traces of scattering after interpolation,
+# this value should be increased. You can specify a vector containing
+# separate widths for each scatter c(15,16,16,14), ordered by raman1,raman2,rayleigh1,rayleigh2.
+remove_scatter_width = c(15,15,15,15) # e.g. 15 or c(15,15,15,15)
+
+# state whether removed scattering should be interpolated
+interpolation &lt;- TRUE # e.g. TRUE
+</code></pre>
+
+<h3>Raman normalisation</h3>
+
+<p>Raman normalisation can be done in two ways. Either you use a blank sample (details see at chapter Blank correction above) to calculate the value for the normalisation [@Lawaetz_2009] or you give a certain value, that is used. Fixed values for each sample can be set in the meta table as well.</p>
+
+<pre><code class="r">### Raman normailsation ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~#
+# State whether a Raman normalisation should be performed
+# Either &quot;blank&quot; if a blank is present in each (sub)folder of the EEM data.
+# Blank samples have to be in the same (sub)folder as the EEM samples. So 
+# different blanks are used for different subsets. The file names of the 
+# blanks have to contain nano, miliq, milliq, mq or blank (cases are ignored).
+# Other samples must not contain these words in their names respectively!
+# Normalisation is then calculated with this blank, the raman area as a number
+# or &quot;meta&quot; if the raman areas should be taken from the meta data table.
+raman_normalisation = &quot;blank&quot; # e.g. &quot;blank&quot;, FALSE, 160, &quot;meta&quot;
+</code></pre>
+
+<h3>Smoothing</h3>
+
+<p>For calculating the peaks the EEMs can be smoothed (citation missing). Peaks and indices are calculated from smoothed EEMs but they are not saved.</p>
+
+<pre><code class="r">### Smooth data for peak picking ###
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Moving window size for smoothing data along excitation wavelengths.
+# Data must be interpolated if you want to use smoothing.
+# This is used for peak picking but not saved.
+smooth = 4 # e.g. FALSE, 4
+</code></pre>
+
+<h2>Running the analysis</h2>
+
+<p>If you reach the box below in the template, all parameters are set and you can finally run the analysis.</p>
+
+<pre><code class="r">#############################################
+#                                           #
+#       THERE ARE NO SETTINGS BELOW.        #
+#  YOU CAN KLICK &quot;KNIT&quot; AT THE MENU BAR.    #
+#  In case of errors, chunk-wise execution  #
+#     of the code can reveal problems!      #
+#                                           #
+#     Please read the help of the used      #
+#        functions if you encounter         #
+#               any problems:               #
+#   Press F1 while cursor in function or    #
+#   type help(function) in command line!    #
+#                                           #
+#             Please read the               #
+#        error messages carefully!          #
+#    Naming of the imput files and table    #
+#     column and row names is crucial!      #
+#                                           #
+#############################################
+</code></pre>
+
+<p>You can run the script by clicking on the Knit button in the toolbar in RStudio. At first run of the script you may be asked if you want to install several packages, please confirm. This can take some time. Your generated files are placed in your specified output folder. In case you experience problems please consider to start over with a &ldquo;fresh&rdquo; template.</p>
+
+<h1>Installation</h1>
+
+<p>The script is running in R environment [@R_Core_Team_2018]. Using a graphical user interface like <a href="https://www.rstudio.com/">RStudio</a> can help beginners to get into it.</p>
+
+<p>You can install staRdom via RStudio by klicking Tools -&gt; Install Packages&hellip; or by entering the command <code>install.packages(&quot;staRdom&quot;)</code> in the command line.</p>
+
+<p>If any of the programmes are already installed on your computer, you can skip the respective step. In case of problems while running the script please consider re-installing/updating the respective programmes.</p>
+
+<h2>R</h2>
+
+<p>Download:</p>
+
+<p><a href="https://cran.r-project.org/mirrors.html">https://cran.r-project.org/mirrors.html</a></p>
+
+<p>Installation manual:</p>
+
+<p><a href="https://cran.r-project.org/doc/manuals/r-release/R-admin.html#R-Installation-and-Administration">https://cran.r-project.org/doc/manuals/r-release/R-admin.html#R-Installation-and-Administration</a></p>
+
+<h2>RStudio</h2>
+
+<p>Download:</p>
+
+<p><a href="https://www.rstudio.com/products/rstudio/download/#download">https://www.rstudio.com/products/rstudio/download/#download</a></p>
+
+<p>Please choose the installer for your operating system, not the zip/tarballs.</p>
+
+<p>Install RStudio by running the setup.</p>
+
+<h2>Optional software</h2>
+
+<p>Optionally(!) you need a <a href="https://www.java.com/de/download/">Java runtime environment</a> to import data from XLS files and a TeX environment (e.g. <a href="http://miktex.org">MikTeX</a> for Windows) to export PDF files. You can use the script to the full extend without those.</p>
+
+<h1>Troubleshooting</h1>
+
+<h2>Peaks table shows NAs</h2>
+
+<p>NA stands for &#39;Not available&#39; and means the wavelength range of the certain peak is missing. Be sure, you measured the range of the certain peak in the lab.</p>
+
+<h2>Only some sample plots show peaks</h2>
+
+<p>If samples differ considerably in amount of DOM, scaling might be a problem. You can scale each sample plot separately by setting scale_col to FALSE.</p>
+
+<h2>I cannot read csv files</h2>
+
+<p>If you encounter problems with reading csv files please visit:</p>
+
+<p><a href="https://support.office.com/en-us/article/Import-data-using-the-Text-Import-Wizard-40c6d5e6-41b0-4575-a54e-967bbe63a048">https://support.office.com/en-us/article/Import-data-using-the-Text-Import-Wizard-40c6d5e6-41b0-4575-a54e-967bbe63a048</a></p>
+
+<h2>I get error messages concerning my output directory</h2>
+
+<p>Be sure the specified hardware existis on your system (e.g. C:/) and you have wirte access. Please also refer to &ldquo;I have problems running the code chunks one after the other&rdquo;.</p>
+
+<h1>References</h1>
+
+</body>
+
+</html>
