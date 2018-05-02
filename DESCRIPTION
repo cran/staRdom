@@ -1,8 +1,8 @@
 Package: staRdom
 Type: Package
 Title: PARAFAC Analysis of EEMs from DOM
-Version: 1.0.3
-Date: 2018-04-16
+Version: 1.0.5
+Date: 2018-05-02
 Authors@R: c(person("Matthias", "Pucher", email = "matthias.pucher@wcl.ac.at",
                   role = c("aut", "cre")),
                   person("Daniel", "Graeber", email = "daniel.graeber@ufz.de",
@@ -29,8 +29,10 @@ Imports: stringr (>= 1.2.0), pracma (>= 2.1.1), tools (>= 3.3), readr
 Suggests: xlsx, knitr, kableExtra, rmarkdown, knitcitations
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+URL: https://github.com/MatthiasPucher/staRdom
+BugReports: https://github.com/MatthiasPucher/staRdom/issues
 NeedsCompilation: no
-Packaged: 2018-04-16 12:57:38 UTC; maetz
+Packaged: 2018-05-02 14:27:43 UTC; matthias
 Author: Matthias Pucher [aut, cre],
   Daniel Graeber [aut, ctb],
   Stefan Preiner [ctb],
@@ -39,4 +41,4 @@ Author: Matthias Pucher [aut, cre],
   Christoph Zechmeister [ctb] (creator of logo)
 Maintainer: Matthias Pucher <matthias.pucher@wcl.ac.at>
 Repository: CRAN
-Date/Publication: 2018-04-16 14:20:04 UTC
+Date/Publication: 2018-05-02 15:14:55 UTC
