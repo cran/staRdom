@@ -208,8 +208,8 @@ hr {
 <p>staRdom is a package for R [@R_Core_Team_2018] to analyse fluorescence and absorbance data of dissolved organic matter (DOM). The important features are:</p>
 
 <ul>
-<li>correcting excitation-emission-matrices (EEM, @Murphy_2013, @Massicotte_2017)</li>
-<li>calculating fluorescence peaks and indices (@Massicotte_2017)
+<li>correcting excitation-emission-matrices (EEM, @Murphy_2013, @Massicotte_2018)</li>
+<li>calculating fluorescence peaks and indices (@Massicotte_2018)
 
 <ul>
 <li>biological index (bix, @Huguet_2009)</li>
@@ -218,7 +218,7 @@ hr {
 <li>humification index (hix, @Ohno_2002)</li>
 </ul></li>
 <li>absorbance slope parameters (a254, a300, E2:E3, E4:E6, S275-295, S350-400, S300-700, SR, @Helms_2008, @Twardowski_2004)</li>
-<li>PARAFAC/CANDECOMP analysis can separate the components of the EEMs (@Murphy_2013, @Helwig_2017).</li>
+<li>PARAFAC/CANDECOMP analysis can separate the components of the EEMs (@Murphy_2013, @Helwig_2018).</li>
 </ul>
 
 <p>staRdom was developed and is maintained at <a href="http://www.wcl.ac.at/index.php/en/">WasserCluster Lunz</a> and the <a href="http://www.boku.ac.at/">University of Natural Resources and Life Sciences, Vienna</a>. I want to thank Daniel Graeber for his support and for sharing his experience and Renata Pinto and Stefan Preiner for testing the scripts.</p>
@@ -271,7 +271,7 @@ sample_dir = &quot;C:/some_folder/input/fluor/&quot; # e.g. sample_dir = &quot;C
 
 <h3>Photometer data (absorbance)</h3>
 
-<p>Absorbance data needed for inner-filter-effect correction and the calculation of the slope parameters is taken from the folder specified with <code>absorbance_dir</code>. The filenames must be identical to the EEM files to link results from one distinct sample. Please be sure, that your file names are unique. File names must not contain &ldquo; &rdquo; (space) or &ldquo;-&rdquo; (minus) or start with a number. For the calculations the cuvette length (in cm) used in the photometer has to be set. Furthermore, you can specify the cell separator and decimal point of you data files.</p>
+<p>Absorbance data needed for inner-filter-effect correction and the calculation of the slope parameters is taken from the folder specified with <code>absorbance_dir</code>. The filenames must be identical to the EEM files to link results from one distinct sample. Please be sure, that your file names are unique. File names must not contain &ldquo; &rdquo; (space) or &ldquo;-&rdquo; (minus) or start with a number. For the calculations the cuvette length (in cm) used in the photometer has to be set.</p>
 
 <pre><code class="r">### Absorbance data ###
 #~~~~~~~~~~~~~~~~~~~~~#
@@ -286,14 +286,11 @@ absorbance_dir = &quot;C:/some_folder/input/absorbance/&quot; # e.g. absorbance_
 # Cuvette length in cm that was used in absorbance measurement.
 # If it is set to &quot;meta&quot; data from the metadata table is used (details see below).
 absorbance_cuv_len = 5 # e.g. absorbance_cuv_len = 5
-
-# separator and decimal point of absorbance data tables (tab is coded as &quot;\t&quot;)
-abs_sep_dec = c(&quot;,&quot;,&quot;.&quot;) # e.g. abs_sep_dec = c(&quot;\t&quot;,&quot;.&quot;)
 </code></pre>
 
 <h3>Meta data</h3>
 
-<p>In case your samples are diverse and you need differing parameters you can set distinct dilution factors, photometer cuvette lengths and raman areas in a table for each sample. You can skip that if your dilution factors and your cuvette lengths are similar and you used blank samples for calculating the raman area. Furthermore, you can specify the cell separator and decimal point of you data files. If your values are identic for all samples you can skip that and add the numbers as described below.</p>
+<p>In case your samples are diverse and you need differing parameters you can set distinct dilution factors, photometer cuvette lengths and raman areas in a table for each sample. You can skip that if your dilution factors and your cuvette lengths are similar and you used blank samples for calculating the raman area. If your values are identic for all samples you can skip that and add the numbers as described below.</p>
 
 <pre><code class="r">### Meta data ###
 #~~~~~~~~~~~~~~~#
@@ -306,9 +303,6 @@ abs_sep_dec = c(&quot;,&quot;,&quot;.&quot;) # e.g. abs_sep_dec = c(&quot;\t&quo
 # read table with metadata as *.TXT or *.CSV
 # either a path or FALSE if no metadata file is used.
 metadata = system.file(&quot;extdata/metatable.csv&quot;,package = &quot;staRdom&quot;) # e.g. metadata = &quot;C:/some_folder/input/metatable.csv&quot;
-
-# separator and decimal point of metadata table (&quot;\t&quot; is for tab).
-meta_sep_dec = c(&quot; &quot;,&quot;.&quot;) # e.g. meta_sep_dec = c(&quot;\t&quot;,&quot;.&quot;)
 
 ### Meta data: names of columns ###
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#

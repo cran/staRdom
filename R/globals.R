@@ -40,5 +40,8 @@ globalVariables(c(
   "tcc_ex",
   "set",
   "y",
-  "comb"
+  "comb",
+  "Freq",
+  "parameter",
+  "meta"
 ), package = "staRdom")

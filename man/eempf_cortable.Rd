@@ -4,10 +4,12 @@
 \alias{eempf_cortable}
 \title{Calculating correlations between the component loadings in all samples (C-Modes).}
 \usage{
-eempf_cortable(cp_out, method = "pearson", ...)
+eempf_cortable(pfmodel, normalisation = FALSE, method = "pearson", ...)
 }
 \arguments{
-\item{cp_out}{results from a PARAFAC analysis, class parafac}
+\item{pfmodel}{results from a PARAFAC analysis, class parafac}
+
+\item{normalisation}{logical, whether normalisation is undone or not}
 
 \item{method}{method of correlation, passed to \code{\link[stats]{cor}}}
 
