@@ -6,7 +6,7 @@
 \usage{
 eempf_residuals_plot(pfmodel, eem_list, res_data = NULL, spp = 5,
   select = NULL, residuals_only = FALSE,
-  cores = parallel::detectCores(logical = FALSE)/2)
+  cores = parallel::detectCores(logical = FALSE))
 }
 \arguments{
 \item{pfmodel}{object of class parafac containing the generated model}
@@ -35,9 +35,9 @@ eem_list may contain samples not used for modelling. Calculation is done by \cod
 \examples{
 \donttest{
 data(eem_list)
-data(pfres_comps1)
+data(pf_models)
 
-eempf_residuals_plot(pfres_comps[[3]],eem_list)
+eempf_residuals_plot(pf4[[1]],eem_list)
 }
 
 }

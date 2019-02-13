@@ -14,9 +14,30 @@
 #' ### check
 eem_is.na <- function(eem_list){
   lapply(eem_list,function(eem){
-    any(is.na(eem$x))
+    any(is.na(eem$x)| is.infinite(eem$x))
   }) %>% unlist() %>%
     setNames(eem_names(eem_list))
+}
+
+#' Check size of EEMs
+#'
+#' @description The size of EEMs in an eemlist is checked and the sample names of samples with more data than the sample with the smallest range are returned.
+#'
+#' @param eem_list eemlist
+#'
+#' @import dplyr
+#'
+#' @return character vector
+#' @export
+#'
+#' @examples
+#' data(eem_list)
+#' eem_checksize(eem_list)
+eem_checksize <- function(eem_list){
+  all_range <- eem_list %>% eem_getextreme()
+  samples_range <- lapply(eem_list,function(eem) eem_getextreme(list(eem)))
+  sample_nr <- lapply(samples_range, function(range) identical(range,all_range)) %>% unlist()
+  eem_list %>% eem_names() %>% .[!sample_nr]
 }
 
 
@@ -91,6 +112,7 @@ eem_duplicates.data.frame <- function(data){
 #' @param absorbance data.frame containing absorbance data.
 #' @param metadata optional data.frame containing metadata.
 #' @param metacolumns character vector of columns that are checkt for complete data sets
+#' @param correction logical, whether EEMs should be checked for applied corrections
 #' @param error logical, whether a problem should cause an error or not.
 #'
 #' @return writes out possible porblems to command line, additionally list with sample names where possible problems were found, see details.
@@ -103,19 +125,37 @@ eem_duplicates.data.frame <- function(data){
 #' @importFrom eemR eem_names eem_extract
 #'
 #' @examples
-#' data(eem_list)
-#' data(abs_data)
+#' folder <- system.file("extdata/EEMs", package = "staRdom") # load example data
+#' eem_list <- eem_read_csv(folder)
 #'
-#' eem_checkdata(eem_list,abs_data)
-eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NULL, error = TRUE){
+#' abs_folder <- system.file("extdata/absorbance", package = "staRdom") # load example data
+#' absorbance <- absorbance_read(abs_folder)
+#'
+#' metatable <- system.file("extdata/metatable_dreem.csv",package = "staRdom")
+#' meta <- read.table(metatable, header = TRUE, sep = ",", dec = ".", row.names = 1)
+#'
+#' checked <- eem_checkdata(eem_list, absorbance, metadata = meta,
+#' metacolumns = "dilution", error = FALSE)
+#' # This example returns a message, that absorbance data for the
+#' # blank samples are missing. As absorbance is supposed to be 0 over
+#' # the whole spectrum when you measure blanks, there is no need
+#' # to supply the data and do an inner-filter effect correction.
+eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NULL, correction = FALSE, error = TRUE){
   problem = FALSE
 
   nas <- which(eem_is.na(eem_list))
   if(length(nas) > 0){
-    cat("NAs were found in the following samples: ",paste0(names(nas),collapse = ", ", sep=", "),fill=TRUE)
+    cat("NAs were found in the following samples: ",paste0(names(nas),collapse = "", sep=", "),fill=TRUE)
     problem = TRUE
   }
 
+  size_prob <- eem_checksize(eem_list)
+  if(length(size_prob) > 0){
+    cat("The following samples contain more EEM data than the smallest in the sample set:",paste0(size_prob,collapse = "", sep=", "),fill=TRUE)
+    problem = TRUE
+  }
+
+if(correction){
   missing_correction <- lapply(c("is_blank_corrected","is_scatter_corrected","is_ife_corrected","is_raman_normalized") %>% `names<-`(.,.), function(cor){
     cat("", fill=TRUE)
     cat("samples missing \"", cor, "\"", fill=TRUE)
@@ -126,6 +166,7 @@ eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NUL
         }
     }) %>% unlist() %>% invisible()
   }) %>% invisible()
+} else missing_correction <- NA
 
   eem_no_abs <- eem_names(eem_list)[!eem_names(eem_list) %in% colnames(absorbance)]
   if(length(eem_no_abs) > 0){
@@ -213,7 +254,8 @@ eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NUL
         return(eem$sample)
       }
     }
-  }) %>% invisible()
+  }) %>% unlist(recursive = FALSE) %>%
+    invisible()
 
   #metadata <- meta
   #metacolumns <- c("dilution")
@@ -232,7 +274,7 @@ eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NUL
       cat("The following sample names were duplicate in metadata:",paste0(metadupls,collapse=", "),fill=TRUE)
     }
     if(!is.null(metacolumns)){
-      problem <- lapply(metacolumns,function(col){
+      problem <- (lapply(metacolumns,function(col){
         problem <- FALSE
         if(col %in% colnames(metadata)){
           #col <- metacolumns[1]
@@ -241,7 +283,7 @@ eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NUL
           #metadata[col] >= 0
           valid <- rownames(metadata)[metadata[col] >= 0]# %>%
           metamissing <- eem_names(eem_list)[!eem_names(eem_list) %in% valid]
-          if(length(meta) > 0){
+          if(length(metamissing) > 0){
             cat(fill=TRUE)
             cat("Metadata column",col,"misses data for samples:",paste0(metamissing,collapse=", "),fill=TRUE)
             problem <- TRUE
@@ -255,13 +297,14 @@ eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NUL
         problem
       }) %>%
         unlist() %>%
-        any() %>%
-        `|`(problem)
+        any()) | problem
     } else cat("No metadata was checked. No columns were supplied.",fill=TRUE)
   } else cat("No metadata was checked. Table was missing.",fill=TRUE)
 
   if(problem & error) stop("Please read the messages above carefully and correct the problems before continuing the analysis!")
-  invisible(list(problem,nas,missing_correction,eem_no_abs,abs_no_eem,duplse,duplsa,invalid_eem,invalid_abs,range_mismatch,metadupls,metamissing,metaadd))
+  invisible(list(problem,nas,size_prob,missing_correction,eem_no_abs,abs_no_eem,duplse,duplsa,invalid_eem,invalid_abs,range_mismatch,metadupls,metamissing,metaadd) %>%
+              setNames(c("Possible_problem_found","NAs_in_EEMs","EEMs_more_data_than_smallest","missing_data_correction","EEMs_missing_absorbance","Absorbance_missing_EEMs","Duplicate_EEM_names",
+                         "Duplicate_absorbance_names","invalid_EEM_names","invalid_absorbance_names","EEM_absorbance_wavelength_range_mismatch","Duplicates_metatable_names","EEMs_missing_metadata","Metadata_missing_EEMs")))
 }
 
 #' Create table that contains sample names and locations of files.
@@ -278,10 +321,11 @@ eem_checkdata <- function(eem_list,absorbance,metadata = NULL, metacolumns = NUL
 #' @import tidyr
 #'
 #' @examples
-#' data(eem_list)
-#' data(abs_data)
+#' folder <- system.file("extdata/EEMs", package = "staRdom") # load example data
+#' eem_list <- eem_read_csv(folder)
+#' data(absorbance)
 #'
-#' eem_metatemplate(eem_list,abs_data)
+#' eem_metatemplate(eem_list,absorbance)
 eem_metatemplate <- function(eem_list = NULL, absorbance = NULL){
   if(!is.null(eem_list)){
     t1 <- data.frame(sample = eem_names(eem_list), eem_location = lapply(eem_list,function(eem) eem$location) %>% unlist(),stringsAsFactors = FALSE)
@@ -335,21 +379,17 @@ eem_corrections <- function(eem_list){
 #' @import tidyr
 #'
 #' @examples
-#' data(eem_list)
-#' data(abs_data)
+#' # no appropriate exmaple data available yet
 #'
-#' abs_data <- abs_data[1:31]
-#'
-#' dilution <- data.frame(dilution = c(rep(1,10),rep(5,10),rep(10,10)))
-#' rownames(dilution) <- eem_names(eem_list)
-#'
-#' dilcorr <- eem_dilcorr(eem_list,abs_data,dilution, auto = TRUE, verbose = FALSE)
 eem_dilcorr <- function(eem_list,abs_data,dilution, auto = FALSE, verbose = TRUE){
   if(verbose){
-    warning("Please read carefully, this function needs some imput from you!", immediate. = TRUE)
+    warning("Please read carefully, this function needs some imput from you!\n", immediate. = TRUE)
     cat("Diluted absorbance can be treated either by replacing it with undiluted data from the same sample or by multiplying it with the dilution factor. Here you can choose which suggested undiluted sample you would like to use or if the multiplication with the dilution factor should be done.",fill=TRUE)
   }
+  #dilution <- meta["dilution"]
+  #auto <- TRUE
   ab <- lapply(eem_list,function(eem){
+    #eem <- eem_list[[1]]
     #cat(eem$sample,fill=TRUE)
     if(dilution[eem$sample,] > 1){
       #abs <- grep(colnames(abs_data),eem$sample,value=TRUE)
@@ -382,7 +422,7 @@ eem_dilcorr <- function(eem_list,abs_data,dilution, auto = FALSE, verbose = TRUE
         eem_comment <- paste0("original EEM sample: ",eem$sample)
         eem_newname <- abs[as.numeric(input)]
       } else{
-        if(verbose) warning("The input '",input,"' for sample ",eem$sample, " could not be propperly interpreted!")
+        if(verbose) warning("The input '",input,"' for sample ",eem$sample, " could not be propperly interpreted!\n")
         eem_comment <- "error in combining diluted and undiluted sample data"
       }
       data.frame(eem_sample = eem$sample, abs_factor = abs_factor,abs_del = abs_del,eem_comment = eem_comment,
@@ -393,6 +433,23 @@ eem_dilcorr <- function(eem_list,abs_data,dilution, auto = FALSE, verbose = TRUE
   }) %>%
     bind_rows() %>%
     `rownames<-`(eem_names(eem_list))
+
+  undil_eem <- ab$eem_newname[ab$eem_newname %in% ab$eem_sample]
+  if(length(undil_eem) > 0){
+  if(auto){
+    ab[ab$eem_sample %in% undil_eem,]$eem_newname <- "delete_eem"
+  } else{
+    cat("Some EEMs seem to have been measured in different dilutions. Please choose which to keep! Please check for duplicate sample names after running eem_eemdil.", fill = TRUE)
+    del_eem <- lapply(undil_eem, function(x) {
+      abstext <- paste0("Sample ",x,"seems to be measured in different dilutions, would you like to [d]elect the undiluted sample or [blank] do nothing?")
+      input <- readline(prompt = abstext)
+      if(input == "d") input <- "delete_eem" else input <- NA
+    }) %>% unlist()
+    ab[ab$eem_sample %in% undil_eem,]$eem_newname <- del_eem
+  }
+  }
+
+  ab
 }
 
 #' Multiply absorbance data according to the dilution and remove absorbance from samples where undiluted data is used.
@@ -413,19 +470,12 @@ eem_dilcorr <- function(eem_list,abs_data,dilution, auto = FALSE, verbose = TRUE
 #' @import tidyr
 #'
 #' @examples
-#' data(eem_list)
-#' data(abs_data)
-#'
-#' abs_data <- abs_data[1:31]
-#'
-#' dilution <- data.frame(dilution = c(rep(1,10),rep(5,10),rep(10,10)))
-#' rownames(dilution) <- eem_names(eem_list)
-#'
-#' abs_data2 <- eem_absdil(abs_data,eem_list,dilution)
+#' # no appropriate exmaple data available yet
 #'
 eem_absdil <- function(abs_data,eem_list = NULL,dilution = NULL, cor_data = NULL, auto = TRUE, verbose = FALSE){
+  #cor_data <- dc
   if(is.null(cor_data)){
-    if(!is.null(eem_list) | !is.null(dilution)){
+    if(!is.null(eem_list) & !is.null(dilution)){
       cor_data <- eem_dilcorr(eem_list,abs_data,dilution, auto = auto, verbose = verbose)
     } else {
       stop("You need to specify either cor_data or eem_list and dilution!")
@@ -436,7 +486,7 @@ eem_absdil <- function(abs_data,eem_list = NULL,dilution = NULL, cor_data = NULL
     select(eem_sample, abs_factor) %>%
     filter(abs_factor > 1) #%>%
   #tibble::column_to_rownames("eem_sample")
-  ad[abs_factor$eem_sample] <- as.data.frame(as.matrix(ad[abs_factor$eem_sample]) %*% diag(abs_factor %>% unlist()))
+  ad[abs_factor$eem_sample] <- as.data.frame(as.matrix(ad[abs_factor$eem_sample]) %*% diag(abs_factor$abs_factor))
   eem_sample <- cor_data$eem_newname %>% unlist() %>% na.omit()
   abs_del <- cor_data$abs_del %>% unlist() %>% na.omit() %>%
     .[!. %in% eem_sample]
@@ -460,15 +510,10 @@ eem_absdil <- function(abs_data,eem_list = NULL,dilution = NULL, cor_data = NULL
 #' @import eemR
 #'
 #' @examples
-#' data(eem_list)
-#' data(abs_data)
-#'
-#' dilution <- data.frame(dilution = c(rep(1,10),rep(5,10),rep(10,10)))
-#' rownames(dilution) <- eem_names(eem_list)
-#'
-#' eem_list2 <- eem_eemdil(eem_list,abs_data,dilution)
+#' # no appropriate exmaple data available yet
 #'
 eem_eemdil <- function(eem_list,abs_data = NULL, dilution = NULL, cor_data = NULL, auto = TRUE, verbose = FALSE){
+  #cor_data <- dc
   if(is.null(cor_data)){
     if(!is.null(eem_list) | !is.null(dilution)){
       cor_data <- eem_dilcorr(eem_list,abs_data,dilution, auto = auto, verbose = verbose)
@@ -476,10 +521,13 @@ eem_eemdil <- function(eem_list,abs_data = NULL, dilution = NULL, cor_data = NUL
       stop("You need to specify either cor_data or abs_data and dilution!")
     }
   }
-  eem_sample <- cor_data$eem_newname %>% `names<-`(cor_data$eem_sample) %>% na.omit()
-  eel <- lapply(eem_list, function(eem){
+  eel <- eem_list %>%
+    eem_extract(paste0("^",cor_data[cor_data$eem_newname == "delete_eem",]$eem_sample %>% na.omit(),"$"))
+  eem_sample <- cor_data$eem_newname %>% `names<-`(cor_data$eem_sample) %>% na.omit() %>% .[. != "delete_eem"]
+  eel <- lapply(eel, function(eem){
     if(!is.na(eem_sample[eem$sample])) eem$sample <- eem_sample[eem$sample] %>% unname()
     eem
   }) %>%
     `class<-`("eemlist")
+  eel
 }

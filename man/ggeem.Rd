@@ -19,30 +19,40 @@ ggeem(data, fill_max = FALSE, ...)
 
 \method{ggeem}{parafac}(data, fill_max = FALSE, ...)
 
-\method{ggeem}{data.frame}(data, fill_max = FALSE, ...)
+\method{ggeem}{data.frame}(data, fill_max = FALSE, redneg = FALSE, ...)
 }
 \arguments{
-\item{data}{eem, eemlist, parafac or data.frame. The details are given under 'Details'}
+\item{data}{eem, eemlist, parafac or data.frame. The details are given under 'Details'.}
 
-\item{fill_max}{FALSE}
+\item{fill_max}{sets the maximum fluorescence value for the colour scale. This is mainly used by other functions, and makes different plots visually comparable.}
 
-\item{...}{parameters passed on to \code{ggplot}}
+\item{...}{parameters passed on to \code{ggplot}.}
+
+\item{redneg}{logical, whether negative values should be coloured discreet.}
 }
 \value{
 a ggplot object
 }
 \description{
-\code{ggeem} creates nice plots from EEM spectra of class ggplot. Plots can be modified as any ggplot by adding layers and/or elements with "+".
+Plots from EEM spectra of class \code{ggplot}. In case you work with a larger number of EEMs and want to show then in several plots, you can use \code{\link{eem_overview_plot}}.
 }
 \details{
 The data can be of different sources:
-    eem: a single EEM pectrum is plotted
-    eemlist: all spectra of the samples are plotted in one facet plot
+    eem: a single EEM spectrum is plotted
+    eemlist: all spectra of the samples are plotted, arranged in a grid
     data.frame: a data.frame containing EEM data. Can be created by e.g. \code{as.data.frame.eem}
+    parafac: a PARAFAC model, the components are plotted then.
+
+    Using redneg you can give negative values a reddish colour. This can help identifying these parts in samples or components. Negative values are physically not possible and can only be the result of measuring errors, model deviations and problems with interpolated values.
+
+    A colour palette can be specified using the argument colpal.
+
+    Plotting distinct samples can be done using \code{\link{eem_extract}}. Please see example.
 }
 \examples{
-## plotting one distinct sample
+## plotting two distinct samples
 data(eem_list)
-eem <- eem_extract(eem_list,c("sample6","sample7"),keep=TRUE)
+eem_names(eem_list)
+eem <- eem_extract(eem_list,c("^dreem_667sf$", "^dreem_661sf$"),keep=TRUE)
 ggeem(eem)
 }

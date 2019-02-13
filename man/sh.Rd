@@ -3,12 +3,12 @@
 \docType{data}
 \name{sh}
 \alias{sh}
-\title{result from PARAFAC split-half analysis}
+\title{result from PARAFAC split-half analysis, periodic data split}
 \format{list of parafacs}
 \usage{
 sh
 }
 \description{
-result from PARAFAC split-half analysis
+result from PARAFAC split-half analysis, periodic data split
 }
 \keyword{datasets}

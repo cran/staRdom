@@ -5,7 +5,7 @@
 \title{Reading absorbance data from txt and csv files.}
 \usage{
 absorbance_read(absorbance_path, order = TRUE, recursive = TRUE,
-  dec = NULL, ...)
+  dec = NULL, sep = NULL, verbose = FALSE, ...)
 }
 \arguments{
 \item{absorbance_path}{directory containing absorbance data files or path to single file. See details for format of absorbance data.}
@@ -16,6 +16,10 @@ absorbance_read(absorbance_path, order = TRUE, recursive = TRUE,
 
 \item{dec}{optional, either you set a decimal separator or the table is tested for . and ,}
 
+\item{sep}{optional, either you set a field separator or it is tried to be determined automatically}
+
+\item{verbose}{logical, provide more information}
+
 \item{...}{additional arguments that are passed on to \code{\link[data.table]{fread}}.}
 }
 \value{
@@ -25,11 +29,12 @@ A data frame containing absorbance data. An attribute "location" contains the fi
 Reading absorbance data from txt and csv files.
 }
 \details{
-If absorbance_path is a directory, contained files that end on "csv" or "txt" are passed on to \code{read.table}. If the path goes to a file, this file is passed on. Tables can either contain data from one sample or from several samples in columns. The column header containig the wavelength must be either "wavelength" or "Wavelength". A multi-sample file must have sample names as column names. A single-sample file can have sample name as column name or sample name as file name and "Abs." as column name. All tables are combined to one with one wavelength column and one column for each sample containing the absorbance data.
+If absorbance_path is a directory, contained files that end on "csv" or "txt" are passed on to \code{read.table}. If the path is a file, this file is read. Tables can either contain data from one sample or from several samples in columns. The first column is considered the wavelength column. A multi-sample file must have sample names as column names. All tables are combined to one with one wavelength column and one column for each sample containing the absorbance data.
+    Column and decimal separators are guessed from the supplied data. In some cases, this can lead to strange results. Plaese set `sep` and `dec` manually if you encounter any problems.
 }
 \examples{
-absorbance_path <- system.file("extdata", "absorbance_eemR", package = "staRdom")
-absorbance_read(absorbance_path)
+absorbance_path <- system.file("extdata", "absorbance", package = "staRdom")
+absorbance <- absorbance_read(absorbance_path, verbose = TRUE)
 }
 \seealso{
 \code{\link[data.table]{fread}}

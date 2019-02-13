@@ -4,22 +4,25 @@
 \alias{eempf_plot_comps}
 \title{Plot all components of PARAFAC models}
 \usage{
-eempf_plot_comps(pfres, type = 1)
+eempf_plot_comps(pfres, type = 1, names = TRUE)
 }
 \arguments{
 \item{pfres}{list of PARAFAC models}
 
-\item{type}{1 for a colour map and 2 for peak lines}
+\item{type}{1 for a colour map and 2 for em and ex wavelength loadings}
+
+\item{names}{logical, whether names of components should be written into the plot}
 }
 \value{
 object of class ggplot
 }
 \description{
-The components can be plottet in two ways: either as a colour map or as two lines (emission, excitation wavelengths) intersecting at the component maximum.
+The components can be plottet in two ways: either as a colour map or as two lines (emission, excitation wavelengths) intersecting at the component maximum. If the list of provided models is named, these names are shown in the plot. Otherwise, the models are automatically named by "model#".
 }
 \examples{
-data(pfres_comps1)
+data(pf_models)
 
-eempf_plot_comps(pfres_comps)
-eempf_plot_comps(pfres_comps,type=2)
+eempf_plot_comps(pf4, type = 1)
+eempf_plot_comps(list(pf4[[1]],pf4[[1]]), type=1)
+
 }

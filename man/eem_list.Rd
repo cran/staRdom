@@ -3,12 +3,12 @@
 \docType{data}
 \name{eem_list}
 \alias{eem_list}
-\title{Fluorescence data of 52 corrected samples.}
+\title{15 fluorescence samples from drEEM used for examples.}
 \format{eemlist}
 \usage{
 eem_list
 }
 \description{
-Fluorescence data of 52 corrected samples.
+15 fluorescence samples from drEEM used for examples.
 }
 \keyword{datasets}

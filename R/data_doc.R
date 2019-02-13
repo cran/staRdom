@@ -1,29 +1,39 @@
-#' Fluorescence data of 52 corrected samples.
+#' 15 fluorescence samples from drEEM used for examples.
 #'
 #' @format eemlist
 "eem_list"
 
-#' blank samples
+#' Fluorescence data of 1 sample of the original data set. Used for comparison in the vignette.
 #'
 #' @format eemlist
-"blank"
+"eem_list_667sf"
 
-#' PARAFAC model
+#' PARAFAC model, see vignette, unconstrained
 #'
 #' @format list of parafacs
-"pfres_comps"
+"pf1"
 
-#' Absorption data of 7 samples
+#' PARAFAC model, see vignette, non-negative constraints
 #'
 #' @format list of parafacs
-"pfres_comps2"
+"pf1n"
 
-#' result from PARAFAC split-half analysis
+#' PARAFAC model, see vignette, non-negative constraints, normalised
+#'
+#' @format list of parafacs
+"pf2"
+
+#' PARAFAC model, see vignette, non-negative constraints, normalised, outliers removed
+#'
+#' @format list of parafacs
+"pf3"
+
+#' PARAFAC model, see vignette, non-negative constraints, normalised, outliers removed, high accuarcy
+#'
+#' @format list of parafacs
+"pf4"
+
+#' result from PARAFAC split-half analysis, periodic data split
 #'
 #' @format list of parafacs
 "sh"
-
-#' raw data from absorbance measurements, 5cm pathlength
-#'
-#' @format list of parafacs
-"abs_data"

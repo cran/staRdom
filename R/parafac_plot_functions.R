@@ -17,11 +17,12 @@
 #'
 #' @examples
 #' \donttest{
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' eempf_compare(pfres_comps)
+#' eempf_compare(pf4)
 #' }
 eempf_compare <- function(pfres){
+  #pfres <- pf4
   p1 <- eempf_fits(pfres)
   p2 <- eempf_plot_comps(pfres,type=1)
   p3 <- eempf_plot_comps(pfres,type=2)
@@ -41,24 +42,29 @@ eempf_compare <- function(pfres){
 #' @import ggplot2
 #'
 #' @examples
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' eempf_fits(pfres_comps)
+#' eempf_fits(pf4)
 eempf_fits <- function(pfres){
+  #pfres <- pf1
+  if(is.null(names(pfres))) names <- rep(NA,length(pfres)) else names <- names(pfres) #paste0("model",1:length(pfres))
   pl <- data.frame(comps=lapply(pfres,"[[","A") %>% lapply(ncol) %>% unlist(),
-                   fit=lapply(pfres,"[[","Rsq") %>% unlist()) %>%
+                   fit=lapply(pfres,"[[","Rsq") %>% unlist(), mod_name = names) %>%
+    rowwise() %>%
+    mutate(comps = ifelse(is.na(mod_name),paste0(comps, " comps"),paste0(mod_name," (",comps, " comps)"))) %>%
     ggplot(aes(x=comps,y=fit))+
+    labs(x="model", y="model fit (Rsq)")+
     geom_point(size=5,shape=4)
-  #pl %>% print()
   pl
 }
 
 #' Plot all components of PARAFAC models
 #'
-#' @description The components can be plottet in two ways: either as a colour map or as two lines (emission, excitation wavelengths) intersecting at the component maximum.
+#' @description The components can be plottet in two ways: either as a colour map or as two lines (emission, excitation wavelengths) intersecting at the component maximum. If the list of provided models is named, these names are shown in the plot. Otherwise, the models are automatically named by "model#".
 #'
 #' @param pfres list of PARAFAC models
-#' @param type 1 for a colour map and 2 for peak lines
+#' @param type 1 for a colour map and 2 for em and ex wavelength loadings
+#' @param names logical, whether names of components should be written into the plot
 #'
 #' @return object of class ggplot
 #' @export
@@ -68,24 +74,35 @@ eempf_fits <- function(pfres){
 #' @importFrom grDevices rainbow
 #'
 #' @examples
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' eempf_plot_comps(pfres_comps)
-#' eempf_plot_comps(pfres_comps,type=2)
-eempf_plot_comps <- function(pfres,type=1){
-  #pf_fits <- pfmodel
+#' eempf_plot_comps(pf4, type = 1)
+#' eempf_plot_comps(list(pf4[[1]],pf4[[1]]), type=1)
+#'
+eempf_plot_comps <- function(pfres,type=1,names=TRUE){
+  #pfres <- pf4
+  #pfres <- list(pf4[[1]],pf4[[1]])
+  #names(pfres) <- c("A","B")
   c <- pfres %>% lapply(eempf_comp_mat)
-  tab <- lapply(c,function(c1){
+  if(is.null(names(c))) names(c) <- paste0("model",seq(1:length(c)))
+  #names(c)
+  tab <- lapply(1:length(c),function(n){
+    #n <- 1
+    #print(n)
+    c1 <- c[[n]]
+    mod_name <- names(c)[n]
+    #print(modname)
     nc1 <- length(c1)
     nc2 <- 0
     lapply(c1,function(c2){
       nc2 <<- nc2 + 1
       c2 <- c2 %>%
-        mutate(comps = nc1, comp = paste0("Comp.",nc2))
+        mutate(comps = nc1, comp = paste0("Comp.",nc2), modname = mod_name)
     }) %>%
       bind_rows()
   }) %>%
     bind_rows()
+  #tab$modname %>% unique()
   fill_max <- tab$value %>% max(na.rm=TRUE)
   vals <- seq(from=0,to=fill_max,length.out = 51)
   vals <- (vals - min(vals))/diff(range(vals))
@@ -95,7 +112,7 @@ eempf_plot_comps <- function(pfres,type=1){
     breaks <- c(breaksx,breaksy) %>% unique() %>% sort()
     #options(warn=-1)
     pl <- tab %>%
-      group_by(comps,comp) %>%
+      group_by(modname,comp) %>%
       mutate(max_pos = which.max(value), max_em = em[max_pos],max_ex = ex[max_pos]) %>%
       mutate(exn = ifelse(em == max_em,ex,NA),emn = ifelse(ex == max_ex,em,NA)) %>%
       filter(!is.na(emn) | !is.na(exn)) %>%
@@ -103,7 +120,8 @@ eempf_plot_comps <- function(pfres,type=1){
       ggplot()+
       geom_line(aes(x=exn,y=value),colour="lightblue",group="excitation", na.rm=TRUE)+
       geom_line(aes(x=emn,y=value),colour="darkblue",group="emission", na.rm=TRUE)+
-      facet_grid(comp ~ comps)+
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))+
+      facet_grid(comp ~ modname)+
       scale_x_discrete(breaks = breaks) +
       labs(x="wavelength")
   } else {
@@ -114,7 +132,7 @@ eempf_plot_comps <- function(pfres,type=1){
       scale_x_discrete(breaks = breaksx) +
       scale_y_discrete(breaks = breaksy) +
       theme(axis.text.x = element_text(angle = 90, hjust = 1))+
-      facet_grid(comp ~ comps)
+      facet_grid(comp ~ modname)
   }
   #print(pl)
   pl
@@ -137,9 +155,9 @@ eempf_plot_comps <- function(pfres,type=1){
 #' @seealso \code{\link[staRdom]{eempf_leverage_ident}}
 #'
 #' @examples
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' leverage <- eempf_leverage(pfres_comps[[3]])
+#' leverage <- eempf_leverage(pf4[[1]])
 #' eempf_leverage_plot(leverage)
 eempf_leverage_plot <- function(cpl,qlabel=0.1){
   breaks <- cpl$x[cpl$mode != "sample"] %>% as.numeric() %>% na.omit() %>% unique() %>% .[.%%50 == 0]
@@ -173,9 +191,9 @@ eempf_leverage_plot <- function(cpl,qlabel=0.1){
 #' @importFrom stats setNames
 #'
 #' @examples
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' leverage <- eempf_leverage(pfres_comps[[2]])
+#' leverage <- eempf_leverage(pf4[[1]])
 #' outliers <- eempf_leverage_ident(leverage)
 eempf_leverage_ident <- function(cpl,qlabel=0.1){
   pl <- eempf_leverage_data(cpl,qlabel=qlabel) %>%
@@ -203,9 +221,9 @@ eempf_leverage_ident <- function(cpl,qlabel=0.1){
 #' @seealso \code{\link[staRdom]{ggeem}}, \code{\link[staRdom]{eempf_load_plot}}
 #'
 #' @examples
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' eempf_comp_load_plot(pfres_comps[[2]])
+#' eempf_comp_load_plot(pf4[[1]])
 eempf_comp_load_plot <- function(pfmodel){
   pl1 <- ggeem(pfmodel)
   pl2 <- eempf_load_plot(pfmodel)
@@ -226,9 +244,9 @@ eempf_comp_load_plot <- function(pfmodel){
 #' @importFrom tibble rownames_to_column
 #'
 #' @examples
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' eempf_load_plot(pfres_comps[[2]])
+#' eempf_load_plot(pf4[[1]])
 eempf_load_plot <- function(pfmodel){
   pfmodel <- norm2A(pfmodel)
   (pfmodel$A) %>%
@@ -251,18 +269,15 @@ eempf_load_plot <- function(pfmodel){
 #' @return plotly plot
 #' @export
 #'
-#' @importFrom plotly plot_ly
-#' @importFrom plotly layout
-#' @importFrom plotly add_surface
 #' @importFrom tibble column_to_rownames
 #' @importFrom tibble remove_rownames
 #' @importFrom grDevices rainbow
 #'
 #' @examples
 #' \dontrun{
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' eempf_comps3D(pfres_comps[[3]])
+#' eempf_comps3D(pf4[[1]])
 #' }
 eempf_comps3D <- function(pfmodel,which=NULL){
   data <- pfmodel %>% eempf_comp_mat()
@@ -284,9 +299,9 @@ eempf_comps3D <- function(pfmodel,which=NULL){
                 yaxis=list(title="ex"))
   lapply(1:length(ex),function(comp){
     if(is.null(which) | comp %in% which){
-      plot_ly(x=em[[comp]],y=ex[[comp]], z=z[[comp]],colors = rainbow(12)[9:1]) %>%
-        layout(scene=scene) %>%
-        add_surface()
+      plotly::plot_ly(x=em[[comp]],y=ex[[comp]], z=z[[comp]],colors = rainbow(12)[9:1]) %>%
+        plotly::layout(scene=scene) %>%
+        plotly::add_surface()
     }
   })
 }
@@ -309,8 +324,8 @@ eempf_comps3D <- function(pfmodel,which=NULL){
 #'
 #' @examples
 #' \donttest{
-#' data(pfres_comps1)
-#' eempf_corplot(pfres_comps[[1]])
+#' data(pf_models)
+#' eempf_corplot(pf4[[1]])
 #' }
 #'
 eempf_corplot <- function(pfmodel,normalisation=FALSE,lower=list(continuous="smooth"),mapping=aes(alpha=0.2),...){
@@ -348,12 +363,12 @@ eempf_corplot <- function(pfmodel,normalisation=FALSE,lower=list(continuous="smo
 #' @examples
 #' \donttest{
 #' data(eem_list)
-#' data(pfres_comps1)
+#' data(pf_models)
 #'
-#' eempf_residuals_plot(pfres_comps[[3]],eem_list)
+#' eempf_residuals_plot(pf4[[1]],eem_list)
 #' }
 #'
-eempf_residuals_plot <- function(pfmodel,eem_list,res_data = NULL, spp = 5, select=NULL, residuals_only = FALSE , cores = parallel::detectCores(logical = FALSE)/2){
+eempf_residuals_plot <- function(pfmodel,eem_list,res_data = NULL, spp = 5, select=NULL, residuals_only = FALSE , cores = parallel::detectCores(logical = FALSE)){
   #pfmodel,eem_list,select=eem_names(eem_list)[10:19]
   if(is.null(res_data)){
     res_data <- eempf_residuals(pfmodel,eem_list,select=select,cores = cores)
@@ -445,7 +460,7 @@ splithalf_plot <- function(fits){
     facet_grid(. ~ comp)+
     scale_x_discrete(breaks = breaks) +
     labs(x="wavelength") +
-    theme(legend.position="none")
+    theme(legend.position="none", axis.text.x = element_text(angle = 90, hjust = 1))
   pl1 %>% print()
 }
 

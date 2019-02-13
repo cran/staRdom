@@ -16,6 +16,41 @@ The analysis process was already discussed in other papers and tutorials. The ai
 
 
 Changelog:
+1.0.12
+  The PARAFAC tutorial was improved and extended again.
+  all examples are taken from drEEM now
+  eem_read_csv function to read EEM data from plain csv files
+  absorbance_read probably recognises csv separators more precisely now
+  eem_extend2largest adds NAs at wavelengths where data is present in any other sample in a set
+  eem_spectral_cor can do spectral corrections using one vector for emission and excitation each
+  eem_load_dreem loads the data from drEEM directly from the website into R
+  A_missing can be used to calculate A-modes from each combination of components now
+  eempf_excomp extract components from PARAFAC models to variables
+  eempf_bindxc bind extracted components into one set of components
+
+1.0.10 to 1.0.11
+  absorbance parameters can be interpolated where wavelengths are missing
+  absorbance can be passed on as absorbance coefficient
+
+1.0.9 to 1.0.10
+  corrected bug: functions not exported
+  PARAFAC models and components can have names
+  PARAFAC tutorial revised
+  exmaple data reduced again because of package size
+  eempf_varimp calculates the variable importance of the components
+  eempf_reorder can reorder the components in a PARAFAC model based on different criteria
+
+1.0.8 to 1.0.9
+  Re-worked PARAFAC tutorial
+  abs_blcor does a baseline correction of absorbance data
+  abs_parms additionally calculates the spectral slope according to Loiselle, 2009
+  eem_setNA can remove defined data and optionally interpolate
+  additional methods for interpolation added
+  eem_matmult multiplies eem data with a certain matrix to cur out data ranges where you expect noise
+  eem_checkdata additionally checks the size of EEMs
+  abs_fit_slope does not produce errors (but a warning) if the absorbance wavelength is smaller than the desired slope limits.
+  absorbance_read is more reliable now and can deal with more formats
+
 1.0.7 to 1.0.8
   documentation was extended
   reading absorbance data can determine decimal separator automatically
