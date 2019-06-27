@@ -6,7 +6,7 @@ cleanbib()
 options("citation_format" = "pandoc")
 bibliography() #style="apalike"
 
-## ----eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE----
+## ----eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE----
 #  title: "DOM analysis"
 #  subtitle: "EEM peak picking, absorbance slope parameters"
 #  date: "`r format(Sys.time(), '%B %e %Y')`"
@@ -27,10 +27,20 @@ bibliography() #style="apalike"
 ## ----eval=FALSE----------------------------------------------------------
 #  # Set the directory with your sample files. Please see eem_read() help for details on file formats.
 #  # Sub folders are read in and are considered different sample sets.
-#  # Import is done with eem.read() (package eemR), please see details there.
+#  # Import is done with eem_read() (package eemR), please see details there.
 #  # The template refers to data coming with the package. Please use your data
 #  # by setting the path to your files!
 #  sample_dir = "C:/some_folder/input/fluor/" # e.g. sample_dir = "C:/some_folder/input/fluor/", system.file() accesses the example data coming with the package!
+#  # Set the used instrument:
+#  # Cary Eclipse: "cary"
+#  # Aqualog: "aqualog"
+#  # Shimadzu: "shimadzu"
+#  # Fluoromax-4: "fluoromax4"
+#  # And furthermore, without hyphens:
+#  # generic csv, excitation column-wise: eem_csv
+#  # generic csv, emission column-wise: eem_csv2
+#  # Hitachi F-7000: eem_hitachi
+#  fluorometer = eem_csv
 
 ## ----eval=FALSE----------------------------------------------------------
 #  ### Absorbance data ###
@@ -131,7 +141,7 @@ bibliography() #style="apalike"
 #  single_plots = FALSE # e.g. TRUE
 
 ## ----eval=FALSE----------------------------------------------------------
-#  #### Save data for further (R) analysis ####
+#  #### Save data for further analysis in R ####
 #  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #  # File name where data is stored in RData format in the output directory.
 #  # Set to FALSE if you dont want your eem data saved.

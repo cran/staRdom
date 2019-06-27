@@ -13,7 +13,7 @@
 <meta name="author" content="Matthias Pucher matthias.pucher@wcl.ac.at" />
 
 
-<title>Correcting raw data, Calculating peaks and indices in EEMS and absorbance (slope) parameters</title>
+<title>Correcting raw data, calculating peaks and indices in EEMS and absorbance (slope) parameters</title>
 
 
 
@@ -82,6 +82,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
+
+
+
 </head>
 
 <body>
@@ -89,10 +92,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">Correcting raw data, Calculating peaks and indices in EEMS and absorbance (slope) parameters</h1>
-<h3 class="subtitle"><em>staRdom: spectroscopic analysis of dissolved organic matter in R</em></h3>
-<h4 class="author"><em>Matthias Pucher <a href="mailto:matthias.pucher@wcl.ac.at">matthias.pucher@wcl.ac.at</a></em></h4>
-<h4 class="date"><em>February 13 2019</em></h4>
+<h1 class="title toc-ignore">Correcting raw data, calculating peaks and indices in EEMS and absorbance (slope) parameters</h1>
+<h3 class="subtitle">staRdom: spectroscopic analysis of dissolved organic matter in R</h3>
+<h4 class="author">Matthias Pucher <a href="mailto:matthias.pucher@wcl.ac.at">matthias.pucher@wcl.ac.at</a></h4>
+<h4 class="date">June 27 2019</h4>
 
 
 <div id="TOC">
@@ -148,21 +151,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>staRdom is a package for R <span class="citation">(R Core Team 2018)</span> to analyse fluorescence (excitation-emission matrices, EEMs) and absorbance data of dissolved organic matter (DOM). The important features are:</p>
+<p>staRdom is a package for R version 3 <span class="citation">(R Core Team 2019)</span> to analyse fluorescence and absorbance data of dissolved organic matter (DOM). The important features are:</p>
 <ul>
-<li>separating the components of the EEMs via PARAFAC/CANDECOMP (<span class="citation">(Murphy et al. 2013; Helwig 2018)</span>).</li>
-<li>correcting excitation-emission-matrices <span class="citation">(Murphy et al. 2013; Massicotte 2018)</span></li>
-<li>calculating fluorescence peaks and indices <span class="citation">(Massicotte 2018)</span>
+<li>separating the components of the EEMs via PARAFAC/CANDECOMP <span class="citation">(Murphy et al. 2013; Bro 1997; Helwig 2019)</span>.</li>
+<li>validating the model using a split-half analysis, the core consistency, the model fit or visually examining the residuals</li>
+<li>correcting excitation-emission-matrices <span class="citation">(Murphy et al. 2013; Massicotte 2019)</span></li>
+<li>calculating fluorescence peaks and indices <span class="citation">(Massicotte 2019)</span></li>
+<li>autochthonous productivity index / freshness index (BIX; <span class="citation">Huguet et al. (2009)</span>, <span class="citation">Fellman, Hood, and Spencer (2010)</span>)</li>
+<li>classical peaks based on manual peak picking (B, T, A, M, C; <span class="citation">Coble (1996)</span>)</li>
+<li>fluorescence index (FI; <span class="citation">McKnight et al. (2001)</span>)</li>
+<li>humification index (HIX; <span class="citation">Ohno (2002)</span>)</li>
+<li>calculating common absorbance (slope) parameters:
 <ul>
-<li>biological index (bix; <span class="citation">Huguet et al. (2009)</span>)</li>
-<li>so-called Coble-peaks (b, t, a, m, c; <span class="citation">Coble (1996)</span>)</li>
-<li>fluorescence index (fi; <span class="citation">McKnight et al. (2001)</span>)</li>
-<li>humification index (hix; <span class="citation">Ohno (2002)</span>)</li>
+<li>absorbance at 254 nm (a254; <span class="citation">Dobbs, Wise, and Dean (1972)</span>),</li>
+<li>absorbance at 300 nm (a300),</li>
+<li>ratio of absorbance at 250 to 365 nm (E2:E3; <span class="citation">Haan and Boer (1987)</span>),</li>
+<li>ratio of absorbance at 465 to 665 nm (E4:E6; <span class="citation">Summers, Cornel, and Roberts (1987)</span>),</li>
+<li>spectral slope within log-transformed absorption spectra range (S275-295, S350-400, S300-700) and the ratio of S275-295 to S350-400 (SR) <span class="citation">(Helms et al. 2008)</span>,</li>
+<li>the wavelength distribution of absorption spectral slopes <span class="citation">(Loiselle et al. 2009)</span> and</li>
+<li>user-defined values and slopes can be extracted or calculated from the absorbance spectra.</li>
 </ul></li>
-<li>calculating common absorbance (slope) parameters (a254, a300, E2:E3, E4:E6, S275-295, S350-400, S300-700, SR and the wavelength distribution of absorption spectral slopes; <span class="citation">Helms et al. (2008)</span>, <span class="citation">Twardowski et al. (2004)</span>, <span class="citation">Massicotte and Markager (2016)</span>, <span class="citation">Loiselle et al. (2009)</span>)</li>
 </ul>
-<p>staRdom has been developed and is maintained at WasserCluster Lunz (<a href="http://www.wcl.ac.at/index.php/en/" class="uri">http://www.wcl.ac.at/index.php/en/</a>) and the University of Natural Resources and Life Sciences, Vienna(<a href="http://www.boku.ac.at/" class="uri">http://www.boku.ac.at/</a>).</p>
-<p>staRdom comes with an Rmd template where you can start your analysis with example data and add your personal data and parameters whenever you feel ready. We recommend to go interactively through this template while reading this vignette to get an overview of what is possible. Each version of staRdom provides a new template and usually using templates from different versions should be fine. In case you have difficulties running the calculations in the template, please use the template of the very same version as the installed staRdom package. As an advanced user, you can just include the functions in whatever calculations you want to do. The vignette describes the template. If you are interested in the specific functions please refer to the help in R, which can be accessed by <code>help(function)</code> of pressing F1 while the cursor is on the function name in the code.</p>
+<p>staRdom has been developed and is maintained at WasserCluster Lunz (<a href="http://www.wcl.ac.at/" class="uri">http://www.wcl.ac.at/</a>) and the University of Natural Resources and Life Sciences, Vienna(<a href="http://www.boku.ac.at/" class="uri">http://www.boku.ac.at/</a>).</p>
+<p>staRdom comes with an Rmd template (<a href="https://rmarkdown.rstudio.com/">infos on Rmd</a>) where you can start your analysis with example data and add your personal data and parameters whenever you feel ready. We recommend to go interactively through the template while reading this vignette to get an overview of what is possible. Each version of staRdom provides a new template and usually using templates from different versions should be fine. In case you have difficulties running the calculations in the template, please use the template of the very same version as the installed staRdom package. As an advanced user, you can just include the functions in whatever calculations you want to do (please see details in the <a href="PARAFAC_analysis_of_EEM.html">advanced vignetts</a>). The vignette describes the template. If you are interested in the specific functions please refer to the help in R, which can be accessed by <code>help(function)</code> or in RStudio pressing F1 while the cursor is on the function name in the code.</p>
 <p>Later in the vignette there is also a chapter about troubleshooting. If you experience problems you may find a useful solution there.</p>
 <div id="aim-of-this-document" class="section level2">
 <h2><span class="header-section-number">1.1</span> Aim of this document</h2>
@@ -172,7 +183,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="hint-for-beginners-in-r" class="section level2">
 <h2><span class="header-section-number">1.2</span> Hint for beginners in R</h2>
-<p>If you are a beginner in R you may find some help at the R-Studio online-learning (<a href="https://www.rstudio.com/online-learning/#r-programming" class="uri">https://www.rstudio.com/online-learning/#r-programming</a>), The Beginner’s Guide to R (<a href="https://www.computerworld.com/article/2497143/business-intelligence/business-intelligence-beginner-s-guide-to-r-introduction.html" class="uri">https://www.computerworld.com/article/2497143/business-intelligence/business-intelligence-beginner-s-guide-to-r-introduction.html</a>) by Computerworld Magazine or below.</p>
+<p>If you are a beginner in R you may find some help at the R-Studio online-learning (<a href="https://www.rstudio.com/online-learning/#r-programming" class="uri">https://www.rstudio.com/online-learning/#r-programming</a>), or Tidyverse for Beginners (<a href="https://rladiessydney.org/littlemisstidyverse" class="uri">https://rladiessydney.org/littlemisstidyverse</a>) by Danielle Navarro.</p>
 <p>The package is available on CRAN and can be installed via <code>install.packages(&quot;staRdom&quot;)</code>.</p>
 </div>
 </div>
@@ -182,7 +193,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="output-parameters" class="section level2">
 <h2><span class="header-section-number">2.1</span> Output parameters</h2>
 <p>On top of the template there are the header parameters necessary to create a report with knitr (<a href="https://yihui.name/knitr/" class="uri">https://yihui.name/knitr/</a>). Parameters can be changed and just show up in the final report (e.g. author, title) or alter the appearance of the document. It is possible to create reports in other file formats. Please find details at <a href="https://rmarkdown.rstudio.com/lesson-9.html" class="uri">https://rmarkdown.rstudio.com/lesson-9.html</a>.</p>
-<p>The directory your generated files are saved in is set by output_dir at line 7. It is important that you keep the ; at the end of the line. Folders are delimited by “/”. In RStudio, pressing the tab key while the cursor is in the path can reveal possible folders on your drive.</p>
+<p>The directory your generated files are saved in is set by output_dir at line 7. It is important that you keep the “;” at the end of the line. Folders are delimited by “/”. In RStudio, pressing the tab key while the cursor is in the path can reveal possible folders on your drive.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">title<span class="op">:</span><span class="st"> &quot;DOM analysis&quot;</span>
+subtitle<span class="op">:</span><span class="st"> &quot;EEM peak picking, absorbance slope parameters&quot;</span>
+date<span class="op">:</span><span class="st"> &quot;`r format(Sys.time(), '%B %e %Y')`&quot;</span>
+author<span class="op">:</span><span class="st"> &quot;WCL&quot;</span>
+knit<span class="op">:</span><span class="st"> </span>(<span class="cf">function</span>(inputFile, encoding) {
+      output_dir =<span class="st"> 'C:/some_folder/output/'</span>;
+      rmarkdown<span class="op">::</span><span class="kw">render</span>(inputFile,
+                        <span class="dt">encoding=</span>encoding, 
+                        <span class="dt">output_file=</span><span class="kw">file.path</span>(output_dir,<span class="kw">paste0</span>(<span class="st">'DOM_EEM_analysis_report_'</span>,<span class="kw">format</span>(<span class="kw">Sys.time</span>(), <span class="st">&quot;%Y%m%d_%H%M%S&quot;</span>),<span class="st">'.htm'</span>)))
+                        })</code></pre></div>
 <p>In case you want to run the code chunk-wise (<a href="https://rmarkdown.rstudio.com/lesson-3.html" class="uri">https://rmarkdown.rstudio.com/lesson-3.html</a>), you need to specify the output folder on line 45.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the directory where all output files are put in.</span>
 <span class="co"># The directory is automatically created if it does not exist.</span>
@@ -194,17 +215,27 @@ output_dir =<span class="st"> &quot;C:/some_folder/another_folder&quot;</span> <
 <p>Please be sure to use the same file names for your fluorometer data, photometer data and meta data, as differing file names are often the reason for a non working analysis.</p>
 <div id="fluorometer-data-eem" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Fluorometer data (EEM)</h3>
-<p>The parameter sample_dir specifies the directory where your data files from the fluorometer are. They have to be in a text format (Cary Eclipse .csv files, Aqualog .dat files, Shimadzu .TXT files, Fluoromax-4 .dat files) (details at eem_read() (<a href="https://www.rdocumentation.org/packages/eemR/versions/0.1.5/topics/eem_read" class="uri">https://www.rdocumentation.org/packages/eemR/versions/0.1.5/topics/eem_read</a>)). Samples can be stored in subfolders as well. Please be sure, that your file names are unique. File names must not contain &quot; &quot; (space) or “-” (minus) or start with a number. The command system.file() as used in the template EEM_simple_analysis.Rmd is used to access the example data and is not needed if you want to use your own data.</p>
+<p>The parameter sample_dir specifies the directory where your data files from the fluorometer are. They have to be in a text format (Cary Eclipse .csv files, Aqualog .dat files, Shimadzu .TXT files, Fluoromax-4 .dat files). Samples can be stored in subfolders as well. Please be sure, that your file names are unique. File names must not contain &quot; &quot; (space) or “-” (minus) or start with a number. The command system.file() as used in the template EEM_simple_analysis.Rmd is used to access the example data and is not needed if you want to use your own data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the directory with your sample files. Please see eem_read() help for details on file formats.</span>
 <span class="co"># Sub folders are read in and are considered different sample sets.</span>
-<span class="co"># Import is done with eem.read() (package eemR), please see details there.</span>
+<span class="co"># Import is done with eem_read() (package eemR), please see details there.</span>
 <span class="co"># The template refers to data coming with the package. Please use your data</span>
 <span class="co"># by setting the path to your files!</span>
-sample_dir =<span class="st"> &quot;C:/some_folder/input/fluor/&quot;</span> <span class="co"># e.g. sample_dir = &quot;C:/some_folder/input/fluor/&quot;, system.file() accesses the example data coming with the package!</span></code></pre></div>
+sample_dir =<span class="st"> &quot;C:/some_folder/input/fluor/&quot;</span> <span class="co"># e.g. sample_dir = &quot;C:/some_folder/input/fluor/&quot;, system.file() accesses the example data coming with the package!</span>
+<span class="co"># Set the used instrument:</span>
+<span class="co"># Cary Eclipse: &quot;cary&quot; </span>
+<span class="co"># Aqualog: &quot;aqualog&quot;</span>
+<span class="co"># Shimadzu: &quot;shimadzu&quot;</span>
+<span class="co"># Fluoromax-4: &quot;fluoromax4&quot;</span>
+<span class="co"># And furthermore, without hyphens:</span>
+<span class="co"># generic csv, excitation column-wise: eem_csv</span>
+<span class="co"># generic csv, emission column-wise: eem_csv2</span>
+<span class="co"># Hitachi F-7000: eem_hitachi</span>
+fluorometer =<span class="st"> </span>eem_csv</code></pre></div>
 </div>
 <div id="photometer-data-absorbance" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Photometer data (absorbance)</h3>
-<p>Absorbance data are needed for inner-filter-effect correction and the calculation of the slope parameters is taken from the folder specified by <code>absorbance_dir</code>. The filenames or column designations must be identical to the EEM files to link fluorescence and absorbance results from one distinct sample. Please be sure, that your file names are unique. File names must not contain &quot; &quot; (space) or “-” (minus) or start with a number. For the calculations the light path length (in cm) used in the photometric measurement has to be set.</p>
+<p>Absorbance data are needed for inner-filter effect correction and the calculation of the slope parameters, They are taken from the folder specified by <code>absorbance_dir</code>. The filenames or column designations must be identical to the EEM file names to link fluorescence and absorbance data distinctly. Please be sure, that your file names are unique. File names must not contain &quot; &quot; (space) or “-” (minus) or start with a number. For the calculations the light path length (in cm) used in the photometric measurement has to be set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Absorbance data <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Absorbance data is read from *.TXT or *.CSV files.</span>
@@ -221,7 +252,7 @@ absorbance_path =<span class="st"> </span><span class="dv">5</span> <span class=
 </div>
 <div id="meta-data" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> Meta data</h3>
-<p>In case your samples measurements differ and you need to set parameters sample-wise, you can set distinct dilution factors, photometer cuvette lengths and raman areas in a table. You can skip that if dilution factors and cuvette lengths are similar and you used blank samples for calculating the raman area. Distinct numbers can then be set as described below. A dilution factor of e.g. 10 means, there is 1 part sample and 9 parts MilliQ added.</p>
+<p>In case your samples measurements differ and you need to set parameters sample-wise, you can set distinct dilution factors, photometer cuvette lengths and Raman areas in a table. You can skip that if dilution factors and cuvette lengths are similar and you used blank samples for calculating the Raman area. Distinct numbers can then be set as described below. A dilution factor of e.g. 10 means, there is 1 part sample and 9 parts MilliQ added.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Meta data <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~#</span>
 <span class="co"># Adding a table with meta data is OPTIONAL!</span>
@@ -253,7 +284,7 @@ col_raman_area =<span class="st"> &quot;raman&quot;</span></code></pre></div>
 </div>
 <div id="spectral-correction" class="section level3">
 <h3><span class="header-section-number">2.2.4</span> Spectral correction</h3>
-<p>Spectral correction is done to remove instrument-specific influences on the EEMs <span class="citation">(DeRose and Resch-Genger 2010)</span>. Some instruments can do this automatically. Correction vectors have to be provided in the same range as the EEM measurements. If this is not the case, the EEMs are cut to this range. Please provide paths to csv tables containing wavelengths in the first column and correction values in the second.</p>
+<p>Spectral correction is done to remove instrument-specific influences on the EEMs <span class="citation">(DeRose and Resch-Genger 2010)</span>. Some instruments can do this automatically. Correction vectors should be provided in at least the same range as the EEM measurements. If this is not the case, the EEMs are cut to this range. Please provide paths to csv tables containing wavelengths in the first column and correction values in the second.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">#### Spectral correction of EEMs ####
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Some instruments, but not all need a spectral correction to compensate</span>
@@ -273,7 +304,7 @@ Excor &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span cl
 <h2><span class="header-section-number">2.3</span> Write out results and plots</h2>
 <div id="results-table" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Results table</h3>
-<p>If you want to export your picked peaks and slope parameters as a table, set the parameter output_xls <code>TRUE</code>. Exporting XLS files needs a properly configured Java environment. If any problems are encountered, a CSV is written to your output directory instead and can be opened with spreadsheet software. Furthermore, you can specify the cell separator and decimal point of you data files in case a CSV file is written.</p>
+<p>If you want to export your picked peaks and slope parameters as a table, set the parameter <code>output_xls = TRUE</code>. Exporting XLS files needs a properly configured Java environment. If any problems are encountered, a CSV is written to your output directory instead and can be opened with a spreadsheet software. Furthermore, you can specify the cell separator and decimal point of you data files in case a CSV file is written.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Table output <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Write a table with peaks and slope parameters.</span>
@@ -285,7 +316,7 @@ out_sep_dec =<span class="st"> </span><span class="kw">c</span>(<span class="st"
 </div>
 <div id="plots" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> Plots</h3>
-<p>The script offers several options for exporting plots. <code>output_overview_png</code> states whether overview plots containing a number of samples (<code>overview_number</code>) are saved in the output directory and <code>output_single_png</code> is the parameter if you want to export single PNGs from each sample. The parameter <code>scale_col</code> defines if the colour range of all plots is synchronised. If you want to compare different samples, it is easier if the colour code has the same range. Weak peaks in samples with lower fluorophore presence than other samples can be found easier if the colours are not synchronised.</p>
+<p>The script offers several options for exporting plots. <code>output_overview_png</code> states whether overview plots containing a number of samples (<code>overview_number</code>) each are saved in the output directory and <code>output_single_png</code> is the parameter if you want to export single PNGs from each sample. The parameter <code>scale_col</code> defines if the colour range of all plots is synchronised. If you want to compare different samples, it is easier if the colour code has the same range. Weak peaks in samples with lower fluorophore presence than other samples can be found easier if the colours are not synchronised.</p>
 <p>With the parameters <code>overview</code> and <code>single_plots</code> these plots can be included in the report using the same parameters <code>scale_col</code> and <code>overview_number</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Plot settings PNG <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~#</span>
@@ -317,7 +348,7 @@ single_plots =<span class="st"> </span><span class="ot">FALSE</span> <span class
 <div id="save-data-to-rdata-file" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> Save data to RData file</h3>
 <p>The data of the analysis can be stored in an Rdata file to keep track of your work or to deepen the analysis later (e.g. PARAFAC).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">#### Save data for further (R) analysis ####
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">#### Save data for further analysis in R ####
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># File name where data is stored in RData format in the output directory.</span>
 <span class="co"># Set to FALSE if you dont want your eem data saved.</span>
@@ -330,10 +361,10 @@ eem_name =<span class="st"> &quot;eem_list&quot;</span></code></pre></div>
 </div>
 <div id="data-correction" class="section level2">
 <h2><span class="header-section-number">2.4</span> Data correction</h2>
-<p>Raw data from fluorometers and photometers bear several shortcomings. <span class="citation">Murphy et al. (2013)</span> addressed several ways of EEM data correction that are used in the staRdom template. Some correction methods need specific data (e.g. absorbance ) to be used. Corrections can be necessary and can help you focus on certain aspects and information covered by noise otherwise. But depending on your aim they might not be necessary. <span class="citation">Bro and Smilde (2003)</span> offer additional information on correction of EEM data.</p>
+<p>Raw data from fluorometers and photometers bear several shortcomings. <span class="citation">Murphy et al. (2013)</span> addressed several ways of EEM data correction that are used in the staRdom template. Some correction methods need specific data (e.g. absorbance ) to be applied. Corrections can be necessary and can help you focus on certain aspects and information covered by noise otherwise. But depending on your aim they might not be necessary. <span class="citation">Bro and Smilde (2003)</span> offer additional information on correction of EEM data.</p>
 <div id="absorbance-baseline-correction" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Absorbance baseline correction</h3>
-<p>The instrumental baseline drift in absorbance data can be removed by subtracting the mean of the absorbance at high wavelengths. The default is to use the spectrum between 680 and 700 nm but any other range can be set manually.</p>
+<p>The instrumental baseline drift in absorbance data can be removed by subtracting the mean of the absorbance at high wavelengths <span class="citation">(Li and Hur 2017)</span>. The default is to use the spectrum between 680 and 700 nm but any other range can be set manually.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">#### Normalising absorbance data to baseline ####
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Absorbance data can be corrected by subtracting a baseline value from each sample.</span>
@@ -344,7 +375,7 @@ abs_norm =<span class="st"> </span><span class="ot">TRUE</span> <span class="co"
 </div>
 <div id="dilution" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> Dilution</h3>
-<p>If samples were diluted before analysis the dilution factor can be set here and the sample will be accordingly corrected. As an example a dilution factor of 10 means a 1:10 dilution (1 part sample and 9 parts milliq). By setting <code>dilution = &quot;meta&quot;</code>, data from the meta table is taken and each sample can be diluted differently.</p>
+<p>If samples were diluted before the spectroscopic measurements, the dilution factor can be set here and the sample will be corrected accordingly. As an example a dilution factor of 10 means a 1:10 dilution (1 part sample and 9 parts MilliQ). By setting <code>dilution = &quot;meta&quot;</code>, data from the meta table is used and each sample can be diluted differently.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Correction of diluted samples <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Set a dilution factor if your samples were diluted.</span>
@@ -353,7 +384,7 @@ abs_norm =<span class="st"> </span><span class="ot">TRUE</span> <span class="co"
 <span class="co"># 1 for no dilution, 10 for dilution 1:10 (1 part sample and 9</span>
 <span class="co"># parts milliq), &quot;meta&quot; for data from meta table</span>
 dilution =<span class="st"> &quot;meta&quot;</span> <span class="co"># e.g. 1 for undiluted samples</span></code></pre></div>
-<p>The reason of diluting a sample can be inner-filter effects that cannot be corrected conveniently if they are too high <span class="citation">Kothawala et al. (2013)</span>. On the contrary, absorbance data might be better analysed undiluted. To combine the results of diluted EEM measurements and undiluted absorbance measurements, the following parameter can be set to do this automatically. Please check the results because depending on your sample names, automatically guessed combinations might not be recognised correctly!</p>
+<p>The reason of diluting a sample can be inner-filter effects that cannot be corrected conveniently if they are too high <span class="citation">(Kothawala et al. 2013)</span>. On the contrary, absorbance data might be better analysed undiluted. To combine the results of diluted EEM measurements and undiluted absorbance measurements, the following parameter can be set to do this automatically. Please check the results because depending on your sample names, automatically guessed combinations might not be recognised correctly!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In case of diluted samples, two absorbance measurements of the</span>
 <span class="co"># same sample in different dilutions might be present. If this is</span>
 <span class="co"># the case, EEMs are renamed to the undiluted sample, absorbance</span>
@@ -366,7 +397,7 @@ dil_sample_name_correction =<span class="st"> </span><span class="ot">FALSE</spa
 </div>
 <div id="spectral-correction-1" class="section level3">
 <h3><span class="header-section-number">2.4.3</span> Spectral correction</h3>
-<p>The spectral correction is described above. Here you can just set, whether a spectral correction should be applied.</p>
+<p>The spectral correction is described above. Here you can set, whether a spectral correction should be applied. Correction vectors need to bet supplied above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">#### Spectral correction of EEMs ####
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Some instruments, but not all need a spectral correction to compensate</span>
@@ -392,7 +423,7 @@ cut_range_to_smallest =<span class="st"> </span><span class="ot">FALSE</span> <s
 </div>
 <div id="blank-correction" class="section level3">
 <h3><span class="header-section-number">2.4.5</span> Blank correction</h3>
-<p>Blank samples are data from measuring milli-Q. Systematic biases can be removed by subtracting the blank sample from each sample. The blank samples have to contain nano, miliq, milliq, mq or blank (cases are ignored) in the file name and has to be in the same (sub)folder as the samples that are corrected with the certain blank. Multiple blanks in one (sub)folder are averaged. It needs to be measured with each sample set (e.g. once a day) <span class="citation">(Murphy et al. 2013)</span> and kept together in one folder.</p>
+<p>Blank samples are data from measuring MilliQ. Systematic biases can be removed by subtracting the blank sample from each sample. The blank samples have to contain “nano”, “miliq”, “milliq”, “mq” or “blank” (cases are ignored) in the file name. Regular samples must not contain one of these words. Blanks have to be in the same (sub)folder as the samples that are corrected with the certain blank. Multiple blanks in one (sub)folder are averaged. It needs to be measured with each sample set (e.g. once a day) <span class="citation">(Murphy et al. 2013)</span> and kept together in one folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Blank correction <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># A blank sample is subtracted from each sample. Blank samples have to be</span>
@@ -404,7 +435,7 @@ blank_correction =<span class="st"> </span><span class="ot">FALSE</span> <span c
 </div>
 <div id="correct-inner-filter-effects" class="section level3">
 <h3><span class="header-section-number">2.4.6</span> Correct inner filter effects</h3>
-<p>The inner-filter effect is caused by absorbance that blocks light in the pathway from the source to the sensor during fluorescence measurements. To apply the inner-filter-effects correction described in <span class="citation">Kothawala et al. (2013)</span>, absorbance data have to be measured for each sample. By knowing the exact absorbance, this effect can be mathematically corrected. In case of a total absorbance greater than 1.5, the sample has to be diluted because otherwise, the linear relationship is not appropriate anymore. You can do this here.</p>
+<p>The inner-filter effect is caused by absorbance that blocks light in the pathway from the source to the sensor during fluorescence measurements. To apply the inner-filter effects correction described in <span class="citation">Kothawala et al. (2013)</span>, absorbance data have to be measured for each sample. By knowing the exact absorbance, this effect can be mathematically corrected. In case of a total absorbance greater than 1.5, the sample has to be diluted because otherwise, the linear relationship is not appropriate anymore.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Inner filter effect correction <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Inner filter effects are corrected. Absorbance data is needed. File or column designations</span>
@@ -413,8 +444,8 @@ ife_correction =<span class="st"> </span><span class="ot">TRUE</span> <span clas
 </div>
 <div id="remove-and-interpolate-scattering" class="section level3">
 <h3><span class="header-section-number">2.4.7</span> Remove and interpolate scattering</h3>
-<p>Diagonal scatter peaks hinder the analysis of EEM data as they usually are much greater than peaks from DOM. They can be partly removed by subtracting the blank sample as described above. Diagonal peaks are called Rayleigh and Raman peaks of first and second order. They can also mak e a PARAFAC analysis impossible. <span class="citation">Senesi (1990)</span> <span class="citation">Lakowicz (2006)</span> and <span class="citation">Coble et al. (1990)</span> offer additional information.</p>
-<p>The width of the removed scatter slot can be determined. Make sure not to lose too much data while still removing the whole peak. If you use the interpolation below, a remaining diagonal peak hints at insufficient width. <span class="citation">Bahram et al. (2006)</span> and <span class="citation">Zepp, Sheldon, and Moran (2004)</span> suggest an interpolation of the removed scattering prior to a PARAFAC analysis and offer a description.</p>
+<p>Diagonal scatter peaks hinder the analysis of EEM data as they usually are much greater than peaks from DOM. They can be partly removed by subtracting the blank sample as described above. Diagonal peaks are called Rayleigh and Raman peaks of first and second order. They can also make a PARAFAC analysis impossible. <span class="citation">Senesi (1990)</span>, <span class="citation">Lakowicz (2006)</span> and <span class="citation">Coble et al. (1990)</span> offer additional information.</p>
+<p>The width of the removed scatter slot can be set. Make sure not to lose too much data while still removing the whole peak. If you use the interpolation below, a remaining diagonal peak hints at insufficient width. <span class="citation">Bahram et al. (2006)</span> and <span class="citation">Zepp, Sheldon, and Moran (2004)</span> suggest an interpolation of the removed scattering prior to a PARAFAC analysis and offer a description.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Remove scattering and interpolate missing data <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Scattering is removed from the EEM spectra.</span>
@@ -432,7 +463,7 @@ interpolation &lt;-<span class="st"> </span><span class="ot">TRUE</span> <span c
 </div>
 <div id="raman-normalisation" class="section level3">
 <h3><span class="header-section-number">2.4.8</span> Raman normalisation</h3>
-<p>Fluorescence intensities can be different from analyses on different fluorometers or on the same fluorometer with different settings. The so-called Raman normalisation makes samples comparable and normalises fluorescence intensities to Raman units. In staRdom, it can be applied in two ways. Either you use a blank sample (details see at chapter Blank correction above) to calculate the value for the normalisation <span class="citation">(Lawaetz and Stedmon 2009)</span> or you give a certain value, that is used. Fixed values for each sample can be set in the meta table as well.</p>
+<p>Fluorescence intensities can differ between analyses on different fluorometers, different settings or different days on the same fluorometer. The so-called Raman normalisation makes samples comparable and normalises fluorescence intensities to Raman units. In staRdom, it can be applied in two ways. Either you use a blank sample (details see at chapter Blank correction above) to calculate the value for the normalisation <span class="citation">(Lawaetz and Stedmon 2009)</span> or you give a certain value, that is used. Fixed values for each sample can be set in the meta table as well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Raman normailsation <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># State whether a Raman normalisation should be performed</span>
@@ -447,7 +478,7 @@ raman_normalisation =<span class="st"> &quot;blank&quot;</span> <span class="co"
 </div>
 <div id="smoothing" class="section level3">
 <h3><span class="header-section-number">2.4.9</span> Smoothing</h3>
-<p>For calculating the peaks, the EEMs can be smoothed. Peaks and indices are calculated from smoothed EEMs but they are not saved. The smoothing parameter specifies the size of a moving average window in nm.</p>
+<p>For calculating the peaks, the EEMs can be smoothed. If so, peaks and indices are calculated from smoothed EEMs but these are not saved. The smoothing parameter specifies the size of a moving average window in nm.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Smooth data for peak picking <span class="al">###</span>
 <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#</span>
 <span class="co"># Moving window size for smoothing data along excitation wavelengths.</span>
@@ -478,12 +509,12 @@ smooth =<span class="st"> </span><span class="dv">4</span> <span class="co"># e.
 <span class="co">#     column and row names is crucial!      #</span>
 <span class="co">#                                           #</span>
 #############################################</code></pre></div>
-<p>You can run the script by clicking on the Knit button in the toolbar in RStudio. At the first run of the script you may be asked if you want to install several packages. Please confirm. This can take some time. Your generated files are placed in your specified output folder. In case you experience problems, consider to start over with a “fresh” template.</p>
+<p>You can run the script by clicking the “Knit” button in the toolbar of RStudio. At the first run of the script you may be asked if you want to install several packages. Please confirm. This can take some time. Your generated files are placed in your specified output folder. In case you experience problems, consider to start over with a “fresh” template.</p>
 </div>
 </div>
 <div id="installation" class="section level1">
 <h1><span class="header-section-number">3</span> Installation</h1>
-<p>The script is running in R environment <span class="citation">(R Core Team 2018)</span>. Using a graphical user interface like RStudio (<a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/</a>) can help beginners to get into it.</p>
+<p>The script is running in R environment <span class="citation">(R Core Team 2019)</span>. Using a graphical user interface like RStudio (<a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/</a>) can help beginners to get into it.</p>
 <p>You can install staRdom via RStudio by klicking Tools -&gt; Install Packages… or by entering the command <code>install.packages(&quot;staRdom&quot;)</code> in the command line.</p>
 <p>If any of the programs are already installed on your computer, you can skip the respective step. In case of problems while running the script, consider re-installing/updating the respective programs.</p>
 <div id="r" class="section level2">
@@ -509,11 +540,11 @@ smooth =<span class="st"> </span><span class="dv">4</span> <span class="co"># e.
 <h1><span class="header-section-number">4</span> Troubleshooting</h1>
 <div id="peaks-table-shows-nas" class="section level2">
 <h2><span class="header-section-number">4.1</span> Peaks table shows NAs</h2>
-<p>NA stands for ‘Not available’ and means the wavelength range of the certain peak is missing. Be sure that you measured the range of the certain peak in the lab.</p>
+<p>NA stands for ‘Not available’ and means the wavelength range of the certain peak is missing. Be sure that you measured the range of the certain peak on your instrument.</p>
 </div>
 <div id="only-some-sample-plots-show-peaks" class="section level2">
 <h2><span class="header-section-number">4.2</span> Only some sample plots show peaks</h2>
-<p>If samples differ considerably in the amount of DOM, scaling might be a problem. You can scale each sample plot separately by setting scale_col to FALSE.</p>
+<p>If samples differ considerably in the amount of DOM, scaling might be a problem. You can scale each sample plot separately by setting <code>scale_col = FALSE</code>.</p>
 </div>
 <div id="i-cannot-read-csv-files-in-ms-excel" class="section level2">
 <h2><span class="header-section-number">4.3</span> I cannot read csv files in MS Excel</h2>
@@ -522,7 +553,7 @@ smooth =<span class="st"> </span><span class="dv">4</span> <span class="co"># e.
 </div>
 <div id="i-get-error-messages-concerning-my-output-directory" class="section level2">
 <h2><span class="header-section-number">4.4</span> I get error messages concerning my output directory</h2>
-<p>Be sure the specified hardware existis on your system (e.g. C:/) and you have write access.</p>
+<p>Be sure the specified drive and folder existis on your system (e.g. C:/) and you have write access.</p>
 </div>
 </div>
 <div id="references" class="section level1 unnumbered">
@@ -530,6 +561,9 @@ smooth =<span class="st"> </span><span class="dv">4</span> <span class="co"># e.
 <div id="refs" class="references">
 <div id="ref-Bahram_2006">
 <p>Bahram, Morteza, Rasmus Bro, Colin Stedmon, and Abbas Afkhami. 2006. “Handling of Rayleigh and Raman Scatter for PARAFAC Modeling of Fluorescence Data Using Interpolation.” <em>Journal of Chemometrics</em> 20 (3-4). Wiley: 99–105. doi:<a href="https://doi.org/10.1002/cem.978">10.1002/cem.978</a>.</p>
+</div>
+<div id="ref-Bro_1997">
+<p>Bro, Rasmus. 1997. “PARAFAC. Tutorial and Applications.” <em>Chemometrics and Intelligent Laboratory Systems</em> 38 (2). Elsevier BV: 149–71. doi:<a href="https://doi.org/10.1016/s0169-7439(97)00032-4">10.1016/s0169-7439(97)00032-4</a>.</p>
 </div>
 <div id="ref-Bro_2003">
 <p>Bro, Rasmus, and Age K. Smilde. 2003. “Centering and Scaling in Component Analysis.” <em>Journal of Chemometrics</em> 17 (1). Wiley: 16–33. doi:<a href="https://doi.org/10.1002/cem.773">10.1002/cem.773</a>.</p>
@@ -543,11 +577,20 @@ smooth =<span class="st"> </span><span class="dv">4</span> <span class="co"># e.
 <div id="ref-DeRose_2010">
 <p>DeRose, Paul C., and Ute Resch-Genger. 2010. “Recommendations for Fluorescence Instrument Qualification: The New ASTM Standard Guide.” <em>Analytical Chemistry</em> 82 (5). American Chemical Society (ACS): 2129–33. doi:<a href="https://doi.org/10.1021/ac902507p">10.1021/ac902507p</a>.</p>
 </div>
+<div id="ref-Dobbs_1972">
+<p>Dobbs, Richard A., Robert H. Wise, and Robert B. Dean. 1972. “The Use of Ultra-Violet Absorbance for Monitoring the Total Organic Carbon Content of Water and Wastewater.” <em>Water Research</em> 6 (10). Elsevier BV: 1173–80. doi:<a href="https://doi.org/10.1016/0043-1354(72)90017-6">10.1016/0043-1354(72)90017-6</a>.</p>
+</div>
+<div id="ref-Fellman_2010">
+<p>Fellman, Jason B., Eran Hood, and Robert G. M. Spencer. 2010. “Fluorescence Spectroscopy Opens New Windows into Dissolved Organic Matter Dynamics in Freshwater Ecosystems: A Review.” <em>Limnology and Oceanography</em> 55 (6). Wiley: 2452–62. doi:<a href="https://doi.org/10.4319/lo.2010.55.6.2452">10.4319/lo.2010.55.6.2452</a>.</p>
+</div>
+<div id="ref-De_Haan_1987">
+<p>Haan, H. De, and T. De Boer. 1987. “Applicability of Light Absorbance and Fluorescence as Measures of Concentration and Molecular Size of Dissolved Organic Carbon in Humic Lake Tjeukemeer.” <em>Water Research</em> 21 (6). Elsevier BV: 731–34. doi:<a href="https://doi.org/10.1016/0043-1354(87)90086-8">10.1016/0043-1354(87)90086-8</a>.</p>
+</div>
 <div id="ref-Helms_2008">
 <p>Helms, John R., Aron Stubbins, Jason D. Ritchie, Elizabeth C. Minor, David J. Kieber, and Kenneth Mopper. 2008. “Absorption Spectral Slopes and Slope Ratios as Indicators of Molecular Weight, Source, and Photobleaching of Chromophoric Dissolved Organic Matter.” <em>Limnology and Oceanography</em> 53 (3). Wiley: 955–69. doi:<a href="https://doi.org/10.4319/lo.2008.53.3.0955">10.4319/lo.2008.53.3.0955</a>.</p>
 </div>
-<div id="ref-Helwig_2018">
-<p>Helwig, Nathaniel E. 2018. <em>Multiway: Component Models for Multi-Way Data</em>. <a href="https://CRAN.R-project.org/package=multiway" class="uri">https://CRAN.R-project.org/package=multiway</a>.</p>
+<div id="ref-Helwig_2019">
+<p>Helwig, Nathaniel E. 2019. <em>Multiway: Component Models for Multi-Way Data</em>. <a href="https://CRAN.R-project.org/package=multiway" class="uri">https://CRAN.R-project.org/package=multiway</a>.</p>
 </div>
 <div id="ref-Huguet_2009">
 <p>Huguet, A., L. Vacher, S. Relexans, S. Saubusse, J.M. Froidefond, and E. Parlanti. 2009. “Properties of Fluorescent Dissolved Organic Matter in the Gironde Estuary.” <em>Organic Geochemistry</em> 40 (6). Elsevier BV: 706–19. doi:<a href="https://doi.org/10.1016/j.orggeochem.2009.03.002">10.1016/j.orggeochem.2009.03.002</a>.</p>
@@ -561,14 +604,14 @@ smooth =<span class="st"> </span><span class="dv">4</span> <span class="co"># e.
 <div id="ref-Lawaetz_2009">
 <p>Lawaetz, A. J., and C. A. Stedmon. 2009. “Fluorescence Intensity Calibration Using the Raman Scatter Peak of Water.” <em>Applied Spectroscopy</em> 63 (8). SAGE Publications: 936–40. doi:<a href="https://doi.org/10.1366/000370209788964548">10.1366/000370209788964548</a>.</p>
 </div>
+<div id="ref-Li_2017">
+<p>Li, Penghui, and Jin Hur. 2017. “Utilization of UV-Vis Spectroscopy and Related Data Analyses for Dissolved Organic Matter (DOM) Studies: A Review.” <em>Critical Reviews in Environmental Science and Technology</em> 47 (3). Informa UK Limited: 131–54. doi:<a href="https://doi.org/10.1080/10643389.2017.1309186">10.1080/10643389.2017.1309186</a>.</p>
+</div>
 <div id="ref-Loiselle_2009">
 <p>Loiselle, Steven A., Luca Bracchini, Arduino M. Dattilo, Maso Ricci, Antonio Tognazzi, Andres C’ozar, and Claudio Rossi. 2009. “The Optical Characterization of Chromophoric Dissolved Organic Matter Using Wavelength Distribution of Absorption Spectral Slopes.” <em>Limnology and Oceanography</em> 54 (2). Wiley: 590–97. doi:<a href="https://doi.org/10.4319/lo.2009.54.2.0590">10.4319/lo.2009.54.2.0590</a>.</p>
 </div>
-<div id="ref-Massicotte_2018">
-<p>Massicotte, Philippe. 2018. <em>EemR: Tools for Pre-Processing Emission-Excitation-Matrix (Eem) Fluorescence Data</em>. <a href="https://github.com/PMassicotte/eemR" class="uri">https://github.com/PMassicotte/eemR</a>.</p>
-</div>
-<div id="ref-Massicotte_2016">
-<p>Massicotte, Philippe, and Stiig Markager. 2016. “Using a Gaussian Decomposition Approach to Model Absorption Spectra of Chromophoric Dissolved Organic Matter.” <em>Marine Chemistry</em> 180: 24–32. <a href="http://linkinghub.elsevier.com/retrieve/pii/S0304420316300081" class="uri">http://linkinghub.elsevier.com/retrieve/pii/S0304420316300081</a>.</p>
+<div id="ref-Massicotte_2019">
+<p>Massicotte, Philippe. 2019. <em>EemR: Tools for Pre-Processing Emission-Excitation-Matrix (Eem) Fluorescence Data</em>. <a href="https://github.com/PMassicotte/eemR" class="uri">https://github.com/PMassicotte/eemR</a>.</p>
 </div>
 <div id="ref-McKnight_2001">
 <p>McKnight, Diane M., Elizabeth W. Boyer, Paul K. Westerhoff, Peter T. Doran, Thomas Kulbe, and Dale T. Andersen. 2001. “Spectrofluorometric Characterization of Dissolved Organic Matter for Indication of Precursor Organic Material and Aromaticity.” <em>Limnology and Oceanography</em> 46 (1). Wiley: 38–48. doi:<a href="https://doi.org/10.4319/lo.2001.46.1.0038">10.4319/lo.2001.46.1.0038</a>.</p>
@@ -579,14 +622,14 @@ smooth =<span class="st"> </span><span class="dv">4</span> <span class="co"># e.
 <div id="ref-Ohno_2002">
 <p>Ohno, Tsutomu. 2002. “Fluorescence Inner-Filtering Correction for Determining the Humification Index of Dissolved Organic Matter.” <em>Environmental Science &amp; Technology</em> 36 (4). American Chemical Society (ACS): 742–46. doi:<a href="https://doi.org/10.1021/es0155276">10.1021/es0155276</a>.</p>
 </div>
-<div id="ref-R_Core_Team_2018">
-<p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<div id="ref-R_Core_Team_2019">
+<p>R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
 </div>
 <div id="ref-Senesi_1990">
 <p>Senesi, Nicola. 1990. “Molecular and Quantitative Aspects of the Chemistry of Fulvic Acid and Its Interactions with Metal Ions and Organic Chemicals.” <em>Analytica Chimica Acta</em> 232. Elsevier BV: 77–106. doi:<a href="https://doi.org/10.1016/s0003-2670(00)81226-x">10.1016/s0003-2670(00)81226-x</a>.</p>
 </div>
-<div id="ref-Twardowski_2004">
-<p>Twardowski, Michael S., Emmanuel Boss, James M. Sullivan, and Percy L. Donaghay. 2004. “Modeling the Spectral Shape of Absorption by Chromophoric Dissolved Organic Matter.” <em>Marine Chemistry</em> 89 (1-4). Elsevier BV: 69–88. doi:<a href="https://doi.org/10.1016/j.marchem.2004.02.008">10.1016/j.marchem.2004.02.008</a>.</p>
+<div id="ref-Summers_1987">
+<p>Summers, R.S., P.K. Cornel, and P.V. Roberts. 1987. “Molecular Size Distribution and Spectroscopic Characterization of Humic Substances.” <em>Science of the Total Environment</em> 62 (January). Elsevier BV: 27–37. doi:<a href="https://doi.org/10.1016/0048-9697(87)90478-5">10.1016/0048-9697(87)90478-5</a>.</p>
 </div>
 <div id="ref-Zepp_2004">
 <p>Zepp, Richard G, Wade M Sheldon, and Mary Ann Moran. 2004. “Dissolved Organic Fluorophores in Southeastern US Coastal Waters: Correction Method for Eliminating Rayleigh and Raman Scattering Peaks in Excitationemission Matrices.” <em>Marine Chemistry</em> 89 (1-4). Elsevier BV: 15–36. doi:<a href="https://doi.org/10.1016/j.marchem.2004.02.006">10.1016/j.marchem.2004.02.006</a>.</p>
