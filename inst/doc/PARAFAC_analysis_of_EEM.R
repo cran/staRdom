@@ -321,9 +321,10 @@ cpl <- eempf_leverage(pf2[[4]])
 # plot leverage (nice plot)
 eempf_leverage_plot(cpl,qlabel=0.1)
 
-# plot leverage, not so nice plot but interactive to select what to exclude
-# saved in exclude, can be used to start over again with eem_list_ex <- eem_list %>% eem_exclude(exclude) above
-exclude <- eempf_leverage_ident(cpl,qlabel=0.1)
+## ----eval=FALSE, include=TRUE, fig.width=7-------------------------------
+#  # plot leverage, not so nice plot but interactive to select what to exclude
+#  # saved in exclude, can be used to start over again with eem_list_ex <- eem_list %>% eem_exclude(exclude) above
+#  exclude <- eempf_leverage_ident(cpl,qlabel=0.1)
 
 ## ----eval=FALSE, include=TRUE--------------------------------------------
 #  # samples, excitation and emission wavelengths to exclude, makes sense after calculation of leverage
@@ -359,20 +360,29 @@ eem_list %>%
 
 ## ----eval=FALSE, include=TRUE--------------------------------------------
 #  ctol <- 10^-8 # decrease tolerance in PARAFAC analysis
-#  nstart = 40 # increase number of random starts
+#  nstart = 20 # increase number of random starts
 #  maxit = 10000 # increase number of maximum interations
 #  
-#  pf4 <- eem_parafac(eem_list_ex, comps = 6, normalise = TRUE, const = c("nonneg", "nonneg", "nonneg"), maxit = maxit, nstart = nstart, ctol = ctol, cores = cores)
+#  pf4 <- eem_parafac(eem_list_ex, comps = 6, normalise = TRUE, const = c("nonneg", "nonneg", "nonneg"), maxit = maxit, nstart = nstart, ctol = ctol, output = "all", cores = cores)
+#  
+#  # check ratio of converging models
+#  lapply(pf4,`[[`,"converged")
+#  
+#  # which models converged?
+#  conv <- pf4[[1]]$models %>% lapply(`[[`, "cflag") %>% unlist()
+#  conv
+#  # what is the SSE in the different models
+#  sses <- pf4[[1]]$models %>% lapply(`[[`, "SSE") %>% unlist()
+#  sses
 #  
 #  pf4 <- lapply(pf4, eempf_rescaleBC, newscale = "Fmax")
 
-## ----eval=TRUE, include=TRUE, fig.width=4, fig.height=6------------------
-# just one model, not really a need to compare
-eempf_compare(pf4, contour = TRUE)
+## ----eval=FALSE, include=TRUE, fig.width=4, fig.height=6-----------------
+#  # just one model, not really a need to compare
+#  eempf_compare(pf4, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE, fig.width=7--------------------------------
-eempf_leverage_plot(eempf_leverage(pf4[[1]])) # [[4]] means the 4th model in the list, 6 component model in that case
-
+eempf_leverage_plot(eempf_leverage(pf4[[1]])) # [[1]] means the 4th model in the list, 6 component model in that case
 
 ## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=6------------------
 eempf_corplot(pf4[[1]], progress = FALSE)
@@ -462,6 +472,13 @@ pf4[[1]] %>%
 
 ## ----eval=FALSE, include = TRUE------------------------------------------
 #  eempf_report(pf4[[1]], export = "parafac_report.html", eem_list = eem_list, shmodel = sh, performance = TRUE)
+
+## ----eval=FALSE, include=TRUE, fig.width=7-------------------------------
+#  pf4 <- eem_parafac(eem_list_ex, comps = 6, normalise = TRUE, const = c("nonneg", "nonneg", "nonneg"), maxit = maxit, nstart = nstart, ctol = ctol, output = "all", cores = cores)
+#  
+#  ssccheck <- eempf_ssccheck(pf4[[1]]$models, best = 3) # best 5 models are shown
+#  
+#  eempf_plot_ssccheck(ssccheck)
 
 ## ----echo=FALSE, message=FALSE, warning=FALSE----------------------------
 write.bibtex(file="references2.bib")

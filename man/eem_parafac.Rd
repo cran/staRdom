@@ -4,9 +4,10 @@
 \alias{eem_parafac}
 \title{Runs a PARAFAC analysis on EEM data}
 \usage{
-eem_parafac(eem_list, comps, maxit = 500, normalise = TRUE,
-  const = c("nonneg", "nonneg", "nonneg"), nstart = 10, ctol = 10^-4,
-  cores = parallel::detectCores(logical = FALSE), verbose = FALSE, ...)
+eem_parafac(eem_list, comps, maxit = 2500, normalise = TRUE,
+  const = c("nonneg", "nonneg", "nonneg"), nstart = 20, ctol = 10^-8,
+  strictly_converging = FALSE, cores = parallel::detectCores(logical =
+  FALSE), verbose = FALSE, output = "best", ...)
 }
 \arguments{
 \item{eem_list}{object of class \code{\link[eemR]{eem}}}
@@ -23,9 +24,13 @@ eem_parafac(eem_list, comps, maxit = 500, normalise = TRUE,
 
 \item{ctol}{Convergence tolerance (R^2 change)}
 
+\item{strictly_converging}{calculate nstart converging models and take the best. Please see details!}
+
 \item{cores}{number of parallel calculations (e.g. number of physical cores in CPU)}
 
 \item{verbose}{print infos}
+
+\item{output}{Output the \code{"best"} solution (default) only or additionally add \code{"all"} \code{nstart} solutions to the model as an element named \code{"models"}.}
 
 \item{...}{additional parameters that are passed on to \code{\link[multiway]{parafac}}}
 }
@@ -35,19 +40,25 @@ object of class parafac
 \description{
 One or more PARAFAC models can be calculated depending on the number of components. The idea is to compare the different models to get the most suitable. B-mode is emmission wavelengths, C-mode is excitation wavelengths and, A-mode is the loadings of the samples. The calculation is done with \code{\link[multiway]{parafac}}, please see details there.
 }
+\details{
+PARAFAC models are created based on multiple random starts. In some cases, a model does not converge and the resulting model is then based on less than nstart converging models. In case you want to have nstart converging models, set strictly_converging TRUE. This calculates models stepwise until the desired number is reached but it takes more calculation time. Increasing the number of models from the beginning is much more time efficient.
+}
 \examples{
 \donttest{
 data(eem_list)
 
 dim_min <- 3 # minimum number of components
 dim_max <- 7 # maximum number of components
-nstart <- 10 # random starts for PARAFAC analysis, models built simulanuously, best selected
+nstart <- 25 # random starts for PARAFAC analysis, models built simulanuously, best selected
 cores <- parallel::detectCores(logical=FALSE) # use all cores but do not use all threads
-maxit = 1000
-ctol <- 10^-5 # tolerance for parafac
+maxit = 2500
+ctol <- 10^-7 # tolerance for parafac
 
-pfres_comps <- eem_parafac(eem_list,comps=seq(dim_min,dim_max),
-    normalise = TRUE,maxit=10000,nstart=nstart,ctol=ctol,cores=cores)
+pfres_comps <- eem_parafac(eem_list, comps = seq(dim_min, dim_max),
+    normalise = TRUE, maxit = maxit, nstart = nstart, ctol = ctol, cores = cores)
+
+pfres_comps2 <- eem_parafac(eem_list, comps = seq(dim_min, dim_max),
+    normalise = TRUE, maxit = maxit, nstart = nstart, ctol = ctol, cores = cores, output = "all")
 }
 }
 \seealso{
