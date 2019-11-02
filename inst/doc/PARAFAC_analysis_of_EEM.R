@@ -39,7 +39,7 @@ eem_list <- eem_read(folder, recursive = TRUE, import_function = eem_csv) # in c
 ## ----eval=FALSE, include=TRUE--------------------------------------------
 #  eem_list <- eem_read(folder, import_function = "cary")
 
-## ----eval=TRUE, fig.width=7, fig.heigth = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
+## ----eval=TRUE, fig.width = 6, fig.height = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
 eem_overview_plot(eem_list, spp=9, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE---------------------------------------------
@@ -84,19 +84,19 @@ eem_list <- eem_extend2largest(eem_list, interpolation = 1, extend = FALSE, core
 # blank subtraction
 eem_list <- eem_remove_blank(eem_list)
 
-## ----eval=TRUE, fig.width=7, fig.heigth = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
+## ----eval=TRUE, fig.width=6, fig.height = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
 eem_overview_plot(eem_list, spp=9, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE---------------------------------------------
 eem_list <- eem_ife_correction(eem_list,absorbance, cuvl = 5)
 
-## ----eval=TRUE, fig.width=7, fig.heigth = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
+## ----eval=TRUE, fig.width=6, fig.height = 5, message=FALSE, warning=FALSE, include=TRUE----
 eem_overview_plot(eem_list, spp=9, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE---------------------------------------------
 eem_list <- eem_raman_normalisation2(eem_list, blank = "blank")
 
-## ----eval=TRUE, fig.width=7, fig.heigth = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
+## ----eval=TRUE, fig.width=6, fig.height = 5, message=FALSE, warning=FALSE, include=TRUE----
 eem_overview_plot(eem_list, spp=9, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE---------------------------------------------
@@ -110,13 +110,13 @@ remove_scatter_width <- c(15,15,15,15)
 
 eem_list <- eem_rem_scat(eem_list, remove_scatter = remove_scatter, remove_scatter_width = remove_scatter_width)
 
-## ----eval=TRUE, fig.width=7, fig.heigth = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
+## ----eval=TRUE, fig.width=6, fig.height = 5, message=FALSE, warning=FALSE, include=TRUE----
 eem_overview_plot(eem_list, spp=9, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE---------------------------------------------
 eem_list <- eem_interp(eem_list, cores = cores, type = 1, extend = FALSE)
 
-## ----eval=TRUE, fig.width=7, fig.heigth = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
+## ----eval=TRUE, fig.width=6, fig.height = 5, message=FALSE, warning=FALSE, include=TRUE----
 eem_overview_plot(eem_list, spp=9, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE---------------------------------------------
@@ -265,7 +265,7 @@ eem_ex <- eem_ex %>%
   `eem_names<-`("d667sf_5_interp") %>%
   eem_bind(eem_ex,.)
 
-## ----echo=FALSE, message=FALSE, warning=FALSE, fig.width=7---------------
+## ----echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height = 4----
 ggeem(eem_ex, contour = TRUE)
 
 ## ----include=TRUE, eval = TRUE-------------------------------------------
@@ -291,18 +291,18 @@ dim_max <- 7
 #  pf1 <- lapply(pf1, eempf_rescaleBC, newscale = "Fmax")
 #  pf1n <- lapply(pf1n, eempf_rescaleBC, newscale = "Fmax")
 
-## ----eval=FALSE, include=TRUE, fig.width=7, fig.height=6-----------------
+## ----eval=FALSE, include=TRUE, fig.width=6, fig.height=5-----------------
 #  # This plot is not shown, because the components violate the assumptions for fluorescence peaks (negative fluorescence). Please try, if you are interested.
 #  eempf_compare(pf1, contour = TRUE)
 
-## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=6------------------
+## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=5------------------
 eempf_compare(pf1n, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE, fig.width=7--------------------------------
 # check for correlation between components table
 eempf_cortable(pf1n[[4]], normalisation = FALSE)
 
-## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=6------------------
+## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=5------------------
 eempf_corplot(pf1n[[4]], progress = FALSE, normalisation = FALSE)
 
 ## ----eval=FALSE,include=TRUE---------------------------------------------
@@ -311,10 +311,12 @@ eempf_corplot(pf1n[[4]], progress = FALSE, normalisation = FALSE)
 #  # rescale B and C modes
 #  pf2 <- lapply(pf2, eempf_rescaleBC, newscale = "Fmax")
 
-## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=6------------------
-eempf_compare(pf2, contour = TRUE)
+## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=5------------------
+# eempf_compare(pf2, contour = TRUE) # use this to show the same plot as above
+# for now, we are happy with just the components
+eempf_plot_comps(pf2, contour = TRUE, type = 1)
 
-## ----fig.width=7---------------------------------------------------------
+## ----fig.width=6---------------------------------------------------------
 # calculate leverage
 cpl <- eempf_leverage(pf2[[4]])
 
@@ -340,16 +342,16 @@ eempf_leverage_plot(cpl,qlabel=0.1)
 #  pf3 <- eem_parafac(eem_list_ex, comps = seq(dim_min,dim_max), normalise = TRUE, maxit = maxit, nstart = nstart, ctol = ctol, cores = cores)
 #  pf3 <- lapply(pf3, eempf_rescaleBC, newscale = "Fmax")
 
-## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=6------------------
-eempf_compare(pf3, contour = TRUE)
+## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=5------------------
+eempf_plot_comps(pf3, contour = TRUE, type = 1)
 
 ## ----eval=TRUE, include=TRUE, fig.width=7--------------------------------
 eempf_leverage_plot(eempf_leverage(pf3[[4]]),qlabel=0.1)
 
-## ----eval=FALSE, include=TRUE, fig.width=7, fig.height=6-----------------
+## ----eval=FALSE, include=TRUE, fig.width=6, fig.height=5-----------------
 #  eempf_residuals_plot(pf3[[4]], eem_list, residuals_only = TRUE, select = c("d0680sfK", "d1266sf", "d1268sfK", "d1543sfK", "dsfb676psp", "dsgb447wt"), spp = 6, cores = cores, contour = TRUE)
 
-## ----eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=6----
+## ----eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=5----
 data("eem_list_outliers")
 eem_list %>%
   eem_extract(5:15) %>%
@@ -360,31 +362,24 @@ eem_list %>%
 
 ## ----eval=FALSE, include=TRUE--------------------------------------------
 #  ctol <- 10^-8 # decrease tolerance in PARAFAC analysis
-#  nstart = 20 # increase number of random starts
+#  nstart = 50 # increase number of random starts
 #  maxit = 10000 # increase number of maximum interations
 #  
 #  pf4 <- eem_parafac(eem_list_ex, comps = 6, normalise = TRUE, const = c("nonneg", "nonneg", "nonneg"), maxit = maxit, nstart = nstart, ctol = ctol, output = "all", cores = cores)
 #  
-#  # check ratio of converging models
-#  lapply(pf4,`[[`,"converged")
-#  
-#  # which models converged?
-#  conv <- pf4[[1]]$models %>% lapply(`[[`, "cflag") %>% unlist()
-#  conv
-#  # what is the SSE in the different models
-#  sses <- pf4[[1]]$models %>% lapply(`[[`, "SSE") %>% unlist()
-#  sses
-#  
 #  pf4 <- lapply(pf4, eempf_rescaleBC, newscale = "Fmax")
+
+## ----eval=TRUE, include=TRUE, fig.width=4, fig.height=6------------------
+eempf_convergence(pf4[[1]])
 
 ## ----eval=FALSE, include=TRUE, fig.width=4, fig.height=6-----------------
 #  # just one model, not really a need to compare
 #  eempf_compare(pf4, contour = TRUE)
 
-## ----eval=TRUE, include=TRUE, fig.width=7--------------------------------
+## ----eval=TRUE, include=TRUE, fig.width=6--------------------------------
 eempf_leverage_plot(eempf_leverage(pf4[[1]])) # [[1]] means the 4th model in the list, 6 component model in that case
 
-## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=6------------------
+## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=5------------------
 eempf_corplot(pf4[[1]], progress = FALSE)
 
 ## ----eval=FALSE, include=TRUE--------------------------------------------
@@ -402,12 +397,12 @@ eempf_corplot(pf4[[1]], progress = FALSE)
 #  # plot is not shown
 #  ggeem(pf4[[1]], contour = TRUE)
 
-## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=6------------------
+## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=5------------------
 eempf_comp_load_plot(pf4[[1]], contour = TRUE)
 
 # eempf_plot_comps(pf4[1], type = 2) # this function can be used to view the B- and C-modes
 
-## ----eval=TRUE, include=TRUE, fig.width=7, fig.height=8------------------
+## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=7------------------
 # plot components in each sample, residual and whole sample
 eempf_residuals_plot(pf4[[1]], eem_list, select = eem_names(eem_list)[10:14], cores = cores, contour = TRUE)
 
@@ -418,7 +413,7 @@ eempf_residuals_plot(pf4[[1]], eem_list, select = eem_names(eem_list)[10:14], co
 ## ----eval=TRUE, include=TRUE, fig.width=7--------------------------------
 data(sh)
 
-## ----eval=TRUE, include=TRUE, fig.width=7--------------------------------
+## ----eval=TRUE, include=TRUE, fig.width=6--------------------------------
 splithalf_plot(sh)
 
 # you can also use the already known plots from eempf_compare
@@ -444,7 +439,7 @@ pf4_wOutliers <- A_missing(eem_list, pfmodel = pf4[[1]], cores = cores)
 ## ----eval=FALSE, include=TRUE, fig.width=7-------------------------------
 #  varimp <- eempf_varimp(pf4[[1]], eem_list_ex, cores = cores)
 
-## ----fig.width=7---------------------------------------------------------
+## ----fig.width=6---------------------------------------------------------
 # get current model names (none set so far!)
 names(pf3)
 # set new model names, number of models must be equal to number of names

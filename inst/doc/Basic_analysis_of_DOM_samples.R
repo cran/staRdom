@@ -31,7 +31,7 @@ bibliography() #style="apalike"
 #  # The template refers to data coming with the package. Please use your data
 #  # by setting the path to your files!
 #  sample_dir = "C:/some_folder/input/fluor/" # e.g. sample_dir = "C:/some_folder/input/fluor/", system.file() accesses the example data coming with the package!
-#  # Set the used instrument:
+#  # Set the used instrument (with hyphens!):
 #  # Cary Eclipse: "cary"
 #  # Aqualog: "aqualog"
 #  # Shimadzu: "shimadzu"
@@ -167,7 +167,7 @@ bibliography() #style="apalike"
 #  # All samples are multiplied with this factor.
 #  # Please use a meta table (above) if your dilutions are differing
 #  # 1 for no dilution, 10 for dilution 1:10 (1 part sample and 9
-#  # parts milliq), "meta" for data from meta table
+#  # parts ultrapure water), "meta" for data from meta table
 #  dilution = "meta" # e.g. 1 for undiluted samples
 
 ## ----eval=FALSE----------------------------------------------------------
