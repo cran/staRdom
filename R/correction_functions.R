@@ -58,7 +58,7 @@
 #'
 #' }
 eem_interp <- function(data,cores = parallel::detectCores(logical = FALSE), type = TRUE, verbose = FALSE, nonneg=TRUE, extend = FALSE,...){
-  cl <- makeCluster(spec = cores, type = "PSOCK")
+  cl <- makeCluster(spec = min(cores,length(data)), type = "PSOCK")
   doParallel::registerDoParallel(cl)
   if(verbose){
     cat("interpolating missing data in",length(data),"EEMs", fill=TRUE)
@@ -344,25 +344,34 @@ eem_dilution <- function(data,dilution=1){
 #'
 #' @param data fluorescence data of class eemlist
 #' @param n width of rolling mean window in nm
+#' @param cores number of CPU cores to be used
 #'
 #' @return eemlist with smoothed data
 #'
 #' @importFrom zoo rollmean
+#' @import parallel
+#'
 #' @export
 #'
 #' @examples
 #' \donttest{
 #' data(eem_list)
 #'
-#' eem_list <- eem_smooth(eem_list,n=4)
+#' eem_list <- eem_smooth(eem_list, n=4, cores = 2)
 #' }
-eem_smooth <- function(data,n = 4){
+eem_smooth <- function(data, n = 4, cores = parallel::detectCores(logical = FALSE)){
   n <- n/2
-  data <- lapply(data,function(eem){
+
+  cl <- makePSOCKcluster(min(cores, length(data)))
+  clusterExport(cl, c("data","n"))
+  clusterEvalQ(cl,require(dplyr))
+  data <- parLapply(cl,data,function(eem){
     k <- which(eem$em[1] + n >= eem$em) %>% max()
-    eem$x <- eem$x %>% apply(2,function(col) col %>% rollmean(k=k,fill=c(0,0,0)))
+    eem$x <- eem$x %>% apply(2,function(col) col %>% zoo::rollmean(k=k,fill=c(0,0,0)))
     eem
   })
+
+  stopCluster(cl)
   class(data) <- "eemlist"
   data
 }

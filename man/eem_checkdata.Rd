@@ -4,8 +4,14 @@
 \alias{eem_checkdata}
 \title{Check your EEM, absorption and metadata before processing}
 \usage{
-eem_checkdata(eem_list, absorbance, metadata = NULL,
-  metacolumns = NULL, correction = FALSE, error = TRUE)
+eem_checkdata(
+  eem_list,
+  absorbance,
+  metadata = NULL,
+  metacolumns = NULL,
+  correction = FALSE,
+  error = TRUE
+)
 }
 \arguments{
 \item{eem_list}{eemlist continaing EEM data.}
@@ -34,7 +40,7 @@ folder <- system.file("extdata/EEMs", package = "staRdom") # load example data
 eem_list <- eem_read(folder, recursive = TRUE, import_function = eem_csv)
 
 abs_folder <- system.file("extdata/absorbance", package = "staRdom") # load example data
-absorbance <- absorbance_read(abs_folder)
+absorbance <- absorbance_read(abs_folder, cores = 2)
 
 metatable <- system.file("extdata/metatable_dreem.csv",package = "staRdom")
 meta <- read.table(metatable, header = TRUE, sep = ",", dec = ".", row.names = 1)
