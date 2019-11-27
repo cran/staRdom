@@ -470,6 +470,7 @@ eempf_leverage_data <- function(cpl,qlabel=0.1){
 #'
 #' pf4[[1]] <- norm2A(pf4[[1]])
 norm2A <- function(pfmodel){
+  if(class(pfmodel) != "parafac") stop("pfmodel must be an object of class parafac!")
   if(!is.null(attr(pfmodel,"norm"))){
     pfmodel$A <- pfmodel$A * attr(pfmodel,"norm_factors")
     attr(pfmodel,"norm_factors") <- NULL
@@ -1021,8 +1022,9 @@ eempf_openfluor <- function(pfmodel, file, Fmax = TRUE){
 #'                           cuvl = 5, n = 4)
 #'                           }
 eempf4analysis <- function(pfmodel,eem_list = NULL, absorbance = NULL, cuvl = NULL, n = 4, export = NULL,...){
-  loadings <- pfmodel$A %>%
+  loadings <- pfmodel %>%
     norm2A() %>%
+    .$A %>%
     data.frame() %>%
     tibble::rownames_to_column("sample")
   if(!is.null(eem_list)){

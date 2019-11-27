@@ -1,4 +1,4 @@
-bb7c8f8b424261a2546f8f66a2d5aab5 *DESCRIPTION
+874a5a93bc7c456342be321011ad4f5c *DESCRIPTION
 db0b8b877f0c970acc28c570e61eecd4 *NAMESPACE
 90a90cfa0660e0a97c6cd7d006b61159 *R/absorption_functions.R
 59b2b9f3e7bc906ccfb2342064fe01ed *R/correction_functions.R
@@ -7,10 +7,10 @@ db0b8b877f0c970acc28c570e61eecd4 *NAMESPACE
 13e478296eec55417dcee83a9cea7bbc *R/data_functions.R
 2d67b41b60b4ac5fac7b12f63aae5752 *R/eem_importers.R
 15d8b29bdeee677280ae792ae9c30152 *R/globals.R
-5c5a50f251ab6bf1a2a2f79e769c8e86 *R/parafac_functions.R
+2e2f3665103a7d24c2a8dc08b8e3d0ca *R/parafac_functions.R
 0d9e23991cb5315b3fb7b304d84104a1 *R/parafac_plot_functions.R
 6f76c2c64cbe36d7550a7530810ac067 *R/plot_functions.R
-bb43e5bb0ea8db725aa75e31b21ff75c *README
+e8e72d92541c96a5507863dd4205e15f *README
 713d5819bf74a363da080ab9453f287e *build/vignette.rds
 8917bb7c84b9fe3e6ce70a83e37d56b7 *data/eem_list.rda
 0fb1b598304b2b424c20d468332e6441 *data/eem_list_outliers.rda
@@ -21,10 +21,10 @@ dabdaad05d8aaffe272c10078b728364 *inst/EEM_simple_analysis.Rmd
 cbadca64b99a4b7d2e6e567fa393a685 *inst/PARAFAC_report.Rmd
 f75265b6daf319ef47eefdb30af3cf5d *inst/doc/Basic_analysis_of_DOM_samples.R
 66b4b5eb63e8c5c422b1fa7abba30cc6 *inst/doc/Basic_analysis_of_DOM_samples.Rmd
-f4b9011e437966a37fdb3cd8c62f78b5 *inst/doc/Basic_analysis_of_DOM_samples.html
+8099f1b2ded083840dbe33b7dc9ff2de *inst/doc/Basic_analysis_of_DOM_samples.html
 0890c365a5b3b3302762d179dad08848 *inst/doc/PARAFAC_analysis_of_EEM.R
 bef04e691c540ce9b53187e42b2267ab *inst/doc/PARAFAC_analysis_of_EEM.Rmd
-47bc863929678b9611e2694020eda02e *inst/doc/PARAFAC_analysis_of_EEM.html
+183ebce806ac2ae8890421bc1faa8a7d *inst/doc/PARAFAC_analysis_of_EEM.html
 a8a528292c13acc63afab78e080a5645 *inst/extdata/CorrectionFiles/mcorrs_4nm.csv
 e67214f51469586e5efbd87a89d2457e *inst/extdata/CorrectionFiles/xc06se06n.csv
 1639c94b4c95781fa103fbb45d1dde3d *inst/extdata/EEMs/di25se06/d423sf.csv
