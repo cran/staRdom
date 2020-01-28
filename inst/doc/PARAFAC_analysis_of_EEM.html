@@ -303,7 +303,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h1 class="title toc-ignore">PARAFAC analysis of EEM data to separate DOM components in R</h1>
 <h3 class="subtitle">staRdom: spectroscopic analysis of dissolved organic matter in R</h3>
 <h4 class="author">Matthias Pucher <a href="mailto:matthias.pucher@wcl.ac.at" class="email">matthias.pucher@wcl.ac.at</a></h4>
-<h4 class="date">November 27 2019</h4>
+<h4 class="date">January 28 2020</h4>
 
 
 <div id="TOC">
@@ -387,8 +387,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <ul>
 <li>separating the components of the EEMs via PARAFAC/CANDECOMP <span class="citation">(Murphy et al. 2013; Bro 1997; Helwig 2019)</span>.</li>
 <li>validating the model using a split-half analysis, the core consistency, the model fit or visually examining the residuals</li>
-<li>correcting excitation-emission-matrices <span class="citation">(Murphy et al. 2013; Massicotte 2019)</span></li>
-<li>calculating fluorescence peaks and indices <span class="citation">(Massicotte 2019)</span></li>
+<li>correcting excitation-emission-matrices <span class="citation">(Murphy et al. 2013; Massicotte 2020)</span></li>
+<li>calculating fluorescence peaks and indices <span class="citation">(Massicotte 2020)</span></li>
 <li>autochthonous productivity index / freshness index (BIX; <span class="citation">Huguet et al. (2009)</span>, <span class="citation">Fellman, Hood, and Spencer (2010)</span>)</li>
 <li>classical peaks based on manual peak picking (B, T, A, M, C; <span class="citation">Coble (1996)</span>)</li>
 <li>fluorescence index (FI; <span class="citation">McKnight et al. (2001)</span>)</li>
@@ -407,7 +407,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>staRdom has been developed and is maintained at WasserCluster Lunz (<a href="http://www.wcl.ac.at/" class="uri">http://www.wcl.ac.at/</a>) and the University of Natural Resources and Life Sciences, Vienna(<a href="http://www.boku.ac.at/" class="uri">http://www.boku.ac.at/</a>).</p>
 <p>A comparison in quality of results and performance of the PARAFAC algorithms in staRdom and drEEM can be found in <span class="citation">(Pucher et al. 2019)</span>. The analysis process was developed and discussed in other papers and tutorials (e.g. <span class="citation">Murphy et al. (2013)</span>). The aim of this package is to provide an elaborate and flexible way of using PARAFAC analysis of EEM data on the R platform. The offered functions follow the concept of <span class="citation">Murphy et al. (2013)</span>. We strongly recommend to read this paper to understand the underlying procedure of the analysis.</p>
 <p>For easy data correction and calculations of peaks, indices and slope parameters in R but without using R functions and codes please see <a href="Basic_analysis_of_DOM_samples.html">vignette for basic analysis</a>. We use functions from the R package eemR, for information on eemR and its functions please see the <a href="https://CRAN.R-project.org/package=eemR">eemR vignette</a>. Details on the actual PARAFAC calculation can be found in the <a href="https://CRAN.R-project.org/package=multiway">multiway documentation</a>.</p>
-<p>This tutorial was created using R version 3.6.1 and the packages dplyr <span class="citation">(Wickham et al. 2019)</span> and tidyr <span class="citation">(Wickham and Henry 2019)</span>.</p>
+<p>This tutorial was created using R version 3.6.2 and the packages dplyr <span class="citation">(Wickham et al. 2019)</span> and tidyr <span class="citation">(Wickham and Henry 2019)</span>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(tidyr)</a></code></pre></div>
 <div id="aim-of-this-document" class="section level2">
@@ -514,9 +514,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## Please think about interpolating the data, this might give more stable and meaningful PARAFAC models!
 ## EEM samples missing absorbance data:
 ## dblank_di25se06 in  
-## /var/tmp/RtmpxcPWOT/Rinst5f0443a5150c/staRdom/extdata/EEMs//di25se06
+## /var/tmp/RtmpwrBoFf/Rinst6124bd7bbe9/staRdom/extdata/EEMs//di25se06
 ## dblank_mq11my in  
-## /var/tmp/RtmpxcPWOT/Rinst5f0443a5150c/staRdom/extdata/EEMs//mq11my</code></pre>
+## /var/tmp/RtmpwrBoFf/Rinst6124bd7bbe9/staRdom/extdata/EEMs//mq11my</code></pre>
 <p>EEM data can contain NAs to perform a PARAFAC analysis as long as there is a certain amount of numeric values present. Depending on the data set, more than 15 to 20 % might cause non-converging models or models converging in a lokal minimum. We always suggest an interpolation of the data to get good results and a stable PARAFAC modelling process <span class="citation">(Elcoroaristizabal, Bro, and Alonso 2015)</span>.</p>
 <p>Different EEM sizes are not a problem, because there is a way to address this as shown below. For a blank subtraction or a PARAFAC analysis, the available data for each sample must be similar.</p>
 <p>The above mentioned absence of absorbance data for the blank samples can be justified, as absorbance of ultrapure water is theoretically 0 over the complete spectrum. In the further analysis, this is no problem.</p>
@@ -990,24 +990,24 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <pre><code>## # A tibble: 18 x 4
 ##    component comb   tcc_ex tcc_em
 ##    &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Comp.1    ABvsCD  1.000  1.000
-##  2 Comp.1    ACvsBD  1.000  1.000
-##  3 Comp.1    ADvsBC  1.000  1.000
-##  4 Comp.2    ABvsCD  1.000  1.000
-##  5 Comp.2    ACvsBD  1.000  1.000
-##  6 Comp.2    ADvsBC  1.000  1.000
-##  7 Comp.3    ABvsCD  0.999  1.000
-##  8 Comp.3    ACvsBD  1.000  0.999
-##  9 Comp.3    ADvsBC  1.000  0.999
-## 10 Comp.4    ABvsCD  1.000  0.999
-## 11 Comp.4    ACvsBD  1.000  0.998
-## 12 Comp.4    ADvsBC  1.000  0.999
-## 13 Comp.5    ABvsCD  1.000  0.999
-## 14 Comp.5    ACvsBD  1.000  1.000
-## 15 Comp.5    ADvsBC  1.000  1.000
-## 16 Comp.6    ABvsCD  1.000  0.996
-## 17 Comp.6    ACvsBD  1.000  0.996
-## 18 Comp.6    ADvsBC  1.000  0.997</code></pre>
+##  1 Comp.1    ABvsCD  1.00   1.00 
+##  2 Comp.1    ACvsBD  1.00   1.00 
+##  3 Comp.1    ADvsBC  1.00   1.00 
+##  4 Comp.2    ABvsCD  1.00   1.00 
+##  5 Comp.2    ACvsBD  1.00   1.00 
+##  6 Comp.2    ADvsBC  1.00   1.00 
+##  7 Comp.3    ABvsCD  0.999  1.00 
+##  8 Comp.3    ACvsBD  1.00   0.999
+##  9 Comp.3    ADvsBC  1.00   0.999
+## 10 Comp.4    ABvsCD  1.00   0.999
+## 11 Comp.4    ACvsBD  1.00   0.998
+## 12 Comp.4    ADvsBC  1.00   0.999
+## 13 Comp.5    ABvsCD  1.00   0.999
+## 14 Comp.5    ACvsBD  1.00   1.00 
+## 15 Comp.5    ADvsBC  1.00   1.00 
+## 16 Comp.6    ABvsCD  1.00   0.996
+## 17 Comp.6    ACvsBD  1.00   0.996
+## 18 Comp.6    ADvsBC  1.00   0.997</code></pre>
 <p>The function <code>eempf_ssc</code> can be used to compare models, not only from a split-half analysis. It returns the shift- and shape-sensitive congruence (SSC, <span class="citation">Wünsch et al. (2019)</span>). Alternatively, the TCC can be calculated using the attribute <code>tcc = TRUE</code>. TCCs and SSCs can be combined over excitation and emission spectra using <code>m = TRUE</code> to calculate the modified TCC <span class="citation">(Parr et al. 2014)</span> or modified SSC respectively.</p>
 </div>
 <div id="loadings-of-outliers" class="section level2">
@@ -1171,8 +1171,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="ref-Loiselle_2009">
 <p>Loiselle, Steven A., Luca Bracchini, Arduino M. Dattilo, Maso Ricci, Antonio Tognazzi, Andres C’ozar, and Claudio Rossi. 2009. “The Optical Characterization of Chromophoric Dissolved Organic Matter Using Wavelength Distribution of Absorption Spectral Slopes.” <em>Limnology and Oceanography</em> 54 (2). Wiley: 590–97. <a href="https://doi.org/10.4319/lo.2009.54.2.0590">https://doi.org/10.4319/lo.2009.54.2.0590</a>.</p>
 </div>
-<div id="ref-Massicotte_2019">
-<p>Massicotte, Philippe. 2019. <em>EemR: Tools for Pre-Processing Emission-Excitation-Matrix (Eem) Fluorescence Data</em>. <a href="https://github.com/PMassicotte/eemR">https://github.com/PMassicotte/eemR</a>.</p>
+<div id="ref-Massicotte_2020">
+<p>Massicotte, Philippe. 2020. <em>EemR: Tools for Pre-Processing Emission-Excitation-Matrix (Eem) Fluorescence Data</em>. <a href="https://github.com/PMassicotte/eemR">https://github.com/PMassicotte/eemR</a>.</p>
 </div>
 <div id="ref-Massicotte_2016">
 <p>Massicotte, Philippe, and Stiig Markager. 2016. “Using a Gaussian Decomposition Approach to Model Absorption Spectra of Chromophoric Dissolved Organic Matter.” <em>Marine Chemistry</em> 180: 24–32. <a href="http://linkinghub.elsevier.com/retrieve/pii/S0304420316300081">http://linkinghub.elsevier.com/retrieve/pii/S0304420316300081</a>.</p>
