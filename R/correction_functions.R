@@ -321,11 +321,21 @@ eem_ife_correction <- function(data, abs_data, cuvl = NULL, unit = c("absorbance
 #' @examples
 #' data(eem_list)
 #'
-#' eem_list <- eem_dilution(eem_list,dilution=5)
+#' eem_list2 <- eem_dilution(eem_list,dilution = 5)
+#'
+#' dilutionT <- data.frame(dilution = rep(5,length(eem_list)))
+#' row.names(dilutionT) <- eem_names(eem_list)
+#' dilutionT
+#'
+#' eem_list3 <- eem_dilution(eem_list, dilution = dilutionT)
+#'
 eem_dilution <- function(data,dilution=1){
   if(((is.numeric(dilution) & length(dilution)==1) | is.data.frame(dilution)) & class(data) == "eemlist"){
+    #if(all(eem_names(data) %in% row.names(dilution)))
     res_list <- lapply(1:length(data),function(i){
       if(is.data.frame(dilution)){
+        no_dil <- which(!(eem_names(data) %in% row.names(dilution)))
+        if(length(no_dil) > 0) stop("Dilution factors are missing for the following samples: ", paste0(eem_names(data)[no_dil], collapse = ", "),"!")
         data[[i]]$x <- data[[i]]$x*dilution[data[[i]]$sample,]
       } else {
         data[[i]]$x <- data[[i]]$x*dilution
@@ -357,13 +367,13 @@ eem_dilution <- function(data,dilution=1){
 #' \donttest{
 #' data(eem_list)
 #'
-#' eem_list <- eem_smooth(eem_list, n=4, cores = 2)
+#' eem_list <- eem_smooth(eem_list, n = 4, cores = 2)
 #' }
 eem_smooth <- function(data, n = 4, cores = parallel::detectCores(logical = FALSE)){
   n <- n/2
 
   cl <- makePSOCKcluster(min(cores, length(data)))
-  clusterExport(cl, c("data","n"))
+  clusterExport(cl, c("data","n"), envir = environment())
   clusterEvalQ(cl,require(dplyr))
   data <- parLapply(cl,data,function(eem){
     k <- which(eem$em[1] + n >= eem$em) %>% max()
