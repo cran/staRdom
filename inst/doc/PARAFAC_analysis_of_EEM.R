@@ -7,10 +7,6 @@
 # If you encounter troubles or you do not know, what this means please start with a fresh, plain R script, read
 # the turial and use the code provided there!
 
-library(knitcitations)
-cleanbib()
-options("citation_format" = "pandoc")
-bibliography() #style="apalike"
 library(knitr)
 library(kableExtra)
 cores <- 2
@@ -474,7 +470,4 @@ pf4[[1]] %>%
 #  ssccheck <- eempf_ssccheck(pf4[[1]]$models, best = 3, cores = cores) # best 3 models are shown
 #  
 #  eempf_plot_ssccheck(ssccheck)
-
-## ----echo=FALSE, message=FALSE, warning=FALSE---------------------------------
-write.bibtex(file="references2.bib")
 

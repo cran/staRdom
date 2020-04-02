@@ -1,10 +1,6 @@
 ## ----message=FALSE, warning=FALSE, include=FALSE------------------------------
-library(knitcitations)
 library(dplyr)
 library(tidyr)
-cleanbib()
-options("citation_format" = "pandoc")
-bibliography() #style="apalike"
 
 ## ----eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE----
 #  title: "DOM analysis"
@@ -277,7 +273,4 @@ bibliography() #style="apalike"
 #  #     column and row names is crucial!      #
 #  #                                           #
 #  #############################################
-
-## ----message=FALSE, warning=FALSE, include=FALSE------------------------------
-write.bibtex(file="references.bib")
 
