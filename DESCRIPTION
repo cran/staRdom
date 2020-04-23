@@ -1,8 +1,8 @@
 Package: staRdom
 Type: Package
 Title: PARAFAC Analysis of EEMs from DOM
-Version: 1.1.10
-Date: 2020-04-02
+Version: 1.1.11
+Date: 2020-04-23
 Authors@R: c(person("Matthias", "Pucher", email = "matthias.pucher@wcl.ac.at",
                   role = c("aut", "cre")),
                   person("Daniel", "Graeber", email = "daniel.graeber@ufz.de",
@@ -29,11 +29,11 @@ VignetteBuilder: knitr
 URL: https://cran.r-project.org/package=staRdom
 BugReports: https://github.com/MatthiasPucher/staRdom/issues
 NeedsCompilation: no
-Packaged: 2020-04-02 08:17:45 UTC; matthias
+Packaged: 2020-04-23 08:48:40 UTC; matthias
 Author: Matthias Pucher [aut, cre],
   Daniel Graeber [aut, ctb],
   Stefan Preiner [ctb],
   Renata Pinto [ctb]
 Maintainer: Matthias Pucher <matthias.pucher@wcl.ac.at>
 Repository: CRAN
-Date/Publication: 2020-04-02 11:30:05 UTC
+Date/Publication: 2020-04-23 16:10:02 UTC
