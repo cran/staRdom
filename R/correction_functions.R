@@ -35,23 +35,23 @@
 #'
 #' remove_scatter <- c(TRUE, TRUE, TRUE, TRUE)
 #'
-#' remove_scatter_width = c(15,10,16,12)
+#' remove_scatter_width = c(15, 10, 16, 12)
 #'
-#' eem_list <- eem_rem_scat(eem_list,remove_scatter,remove_scatter_width)
+#' eem_list <- eem_rem_scat(eem_list, remove_scatter, remove_scatter_width)
 #'
-#' eem_list <- eem_interp(eem_list)
+#' eem_list <- eem_interp(eem_list, cores = 2)
 #'
 #' ggeem(eem_list)
 #'
-#' eem_list2 <- eem_setNA(eem_list,ex=200:280,interpolate=FALSE)
+#' eem_list2 <- eem_setNA(eem_list, ex = 200:280, interpolate=FALSE)
 #'
 #' ggeem(eem_list2)
 #'
-#' eem_list3 <- eem_interp(eem_list2,type=1,extend = TRUE)
+#' eem_list3 <- eem_interp(eem_list2, type = 1, extend = TRUE, cores = 2)
 #'
 #' ggeem(eem_list3)
 #'
-#' eem_list3 <- eem_interp(eem_list2,type=1,extend = FALSE)
+#' eem_list3 <- eem_interp(eem_list2, type = 1, extend = FALSE, cores = 2)
 #'
 #' ggeem(eem_list3)
 #'
@@ -557,6 +557,7 @@ eem_matmult <- function(eem_list,matrix = NULL,value = 0){
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' library(dplyr)
 #' data(eem_list)
 #' eem_list <- eem_exclude(eem_list[1:5] %>%
@@ -566,6 +567,7 @@ eem_matmult <- function(eem_list,matrix = NULL,value = 0){
 #'
 #' eem_extend2largest(eem_list) %>%
 #'   ggeem()
+#' }
 eem_extend2largest <- function(eem_list, interpolation = FALSE,...){
   exs <- lapply(eem_list, function(eem) eem$ex) %>%
     unlist() %>%

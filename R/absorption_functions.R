@@ -140,7 +140,7 @@ absorbance_read <- function(absorbance_path, order = TRUE, recursive = TRUE, dec
 #' @return A data frame containing the adsorption slopes and slope ratios in column, one line for each sample.
 #'
 #' @references Helms, J., Kieber, D., Mopper, K. 2008. Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter. Limnol. Oceanogr., 53(3), 955–969
-#' \url{http://onlinelibrary.wiley.com/doi/10.4319/lo.2008.53.3.0955/pdf}
+#' \url{https://aslopubs.onlinelibrary.wiley.com/doi/pdf/10.4319/lo.2008.53.3.0955}
 #'
 #' @import dplyr
 #' @import doParallel
@@ -155,8 +155,8 @@ absorbance_read <- function(absorbance_path, order = TRUE, recursive = TRUE, dec
 #' \donttest{
 #' data(absorbance)
 #'
-#' a1 <- abs_parms(absorbance, cuvle = 5, verbose = TRUE)
-#' a2 <- abs_parms(absorbance, cuvle = 5,l_ref=list(NA,NA,NA), lref=TRUE) # fit lref as well
+#' a1 <- abs_parms(absorbance, cuvle = 5, verbose = TRUE, cores = 2)
+#' a2 <- abs_parms(absorbance, cuvle = 5,l_ref=list(NA,NA,NA), lref=TRUE, cores = 2) # fit lref as well
 #' }
 abs_parms <- function(abs_data, cuvle = NULL, unit = c("absorbance", "absorption"), add_as = NULL, limits = list(c(275, 295), c(350, 400), c(300, 700)), l_ref = list(275, 350, 300), S = TRUE, lref = FALSE, p = FALSE, model = FALSE, Sint = FALSE, interval = 21, r2threshold = 0.8, cores = parallel::detectCores(logical = FALSE), verbose = FALSE){
   if(!unit[1] %in% c("absorbance","absorption")) stop("Unit must be either 'absorbance' or 'absorption'!")
@@ -348,12 +348,15 @@ abs_fit_slope <- function(wl,abs,lim,l_ref = 350,control = drmc(errorm = FALSE, 
 #' @examples
 #' data(absorbance)
 #' abs_data_cor <- abs_blcor(absorbance)
+#'
+#' abs_data_cor1 <- abs_blcor(absorbance[1:2])
+#'
 abs_blcor <- function(abs_data, wlrange = c(680,700)){
   ad <- abs_data %>%
     .[.$wavelength >= wlrange[1] & .$wavelength <= wlrange[2],] %>%
     apply(2,mean,na.rm=TRUE)
   ad2 <- sweep(data.matrix(abs_data),2,ad) %>%
     as.data.frame() %>%
-    .[,2:ncol(.)] %>%
-    cbind(wavelength = abs_data$wavelength,.)
+    select(-1) %>%
+    bind_cols(wavelength = abs_data$wavelength,.)
 }

@@ -81,11 +81,11 @@ For further details please refer to Helm et al. (2008).
 \donttest{
 data(absorbance)
 
-a1 <- abs_parms(absorbance, cuvle = 5, verbose = TRUE)
-a2 <- abs_parms(absorbance, cuvle = 5,l_ref=list(NA,NA,NA), lref=TRUE) # fit lref as well
+a1 <- abs_parms(absorbance, cuvle = 5, verbose = TRUE, cores = 2)
+a2 <- abs_parms(absorbance, cuvle = 5,l_ref=list(NA,NA,NA), lref=TRUE, cores = 2) # fit lref as well
 }
 }
 \references{
 Helms, J., Kieber, D., Mopper, K. 2008. Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter. Limnol. Oceanogr., 53(3), 955–969
-\url{http://onlinelibrary.wiley.com/doi/10.4319/lo.2008.53.3.0955/pdf}
+\url{https://aslopubs.onlinelibrary.wiley.com/doi/pdf/10.4319/lo.2008.53.3.0955}
 }
