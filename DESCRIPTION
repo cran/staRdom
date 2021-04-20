@@ -1,8 +1,8 @@
 Package: staRdom
 Type: Package
 Title: PARAFAC Analysis of EEMs from DOM
-Version: 1.1.18
-Date: 2020-11-25
+Version: 1.1.21
+Date: 2021-04-17
 Authors@R: c(person("Matthias", "Pucher", email = "matthias.pucher@wcl.ac.at",
                   role = c("aut", "cre")),
                   person("Daniel", "Graeber", email = "daniel.graeber@ufz.de",
@@ -17,23 +17,24 @@ Description: This is a user-friendly way to run a parallel factor (PARAFAC) anal
 License: AGPL
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr (>= 1.0.2), tidyr (>= 1.1.2), stringr (>= 1.4.0), pracma
-        (>= 2.2.9), zoo (>= 1.8-8), tibble (>= 3.0.3), multiway (>=
+Imports: dplyr (>= 1.0.5), tidyr (>= 1.1.2), stringr (>= 1.4.0), pracma
+        (>= 2.3.3), zoo (>= 1.8-8), tibble (>= 3.1.0), multiway (>=
         1.0-6), GGally (>= 2.0.0), graphics (>= 4.0), doParallel (>=
         1.0.16), drc (>= 3.0-1), foreach (>= 1.5.1), data.table (>=
-        1.13.2), matrixStats (>= 0.57.0), MBA(>= 0.0-9), cdom(>=
-        0.1.0), R.matlab(>= 3.6.2), readr(>= 1.4.0), gtools(>= 3.8.2)
+        1.14.0), matrixStats (>= 0.57.0), MBA(>= 0.0-9), cdom(>=
+        0.1.0), R.matlab(>= 3.6.2), readr(>= 1.4.0), gtools(>= 3.8.2),
+        httr(>= 1.4.2), askpass(>= 1.1)
 Suggests: plotly, xlsx, knitr, kableExtra, rmarkdown
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 URL: https://cran.r-project.org/package=staRdom
 BugReports: https://github.com/MatthiasPucher/staRdom/issues
 NeedsCompilation: no
-Packaged: 2020-11-25 15:21:16 UTC; matthias
+Packaged: 2021-04-19 07:34:27 UTC; matthias
 Author: Matthias Pucher [aut, cre],
   Daniel Graeber [aut, ctb],
   Stefan Preiner [ctb],
   Renata Pinto [ctb]
 Maintainer: Matthias Pucher <matthias.pucher@wcl.ac.at>
 Repository: CRAN
-Date/Publication: 2020-11-25 16:10:02 UTC
+Date/Publication: 2021-04-20 11:00:03 UTC
