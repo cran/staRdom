@@ -22,7 +22,7 @@ library(tidyr)
 #  install.packages("devtools") # Run this only, if devtools is not installed already.
 #  devtools::install_github("MatthiasPucher/staRdom")
 
-## ----eval=TRUE, include=TRUE--------------------------------------------------
+## ----eval=TRUE, message=FALSE, warning=FALSE, include=TRUE--------------------
 library("staRdom")
 
 ## ----eval=FALSE, include=TRUE-------------------------------------------------
@@ -35,7 +35,7 @@ eem_list <- eem_read(folder, recursive = TRUE, import_function = eem_csv) # in c
 ## ----eval=FALSE, include=TRUE-------------------------------------------------
 #  eem_list <- eem_read(folder, import_function = "cary")
 
-## ----eval=TRUE, fig.width = 6, fig.height = 5, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
+## ----eval=TRUE, fig.height=5, fig.width=6, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE----
 eem_overview_plot(eem_list, spp=9, contour = TRUE)
 
 ## ----eval=TRUE, include=TRUE--------------------------------------------------
@@ -358,10 +358,10 @@ eem_list %>%
 
 ## ----eval=FALSE, include=TRUE-------------------------------------------------
 #  ctol <- 10^-8 # decrease tolerance in PARAFAC analysis
-#  nstart = 50 # increase number of random starts
+#  nstart = 20 # number of random starts
 #  maxit = 10000 # increase number of maximum interations
 #  
-#  pf4 <- eem_parafac(eem_list_ex, comps = 6, normalise = TRUE, const = c("nonneg", "nonneg", "nonneg"), maxit = maxit, nstart = nstart, ctol = ctol, output = "all", cores = cores)
+#  pf4 <- eem_parafac(eem_list_ex, comps = 6, normalise = TRUE, const = c("nonneg", "nonneg", "nonneg"), maxit = maxit, nstart = nstart, ctol = ctol, output = "all", cores = cores, strictly_converging = TRUE)
 #  
 #  pf4 <- lapply(pf4, eempf_rescaleBC, newscale = "Fmax")
 
@@ -398,13 +398,13 @@ eempf_comp_load_plot(pf4[[1]], contour = TRUE)
 
 # eempf_plot_comps(pf4[1], type = 2) # this function can be used to view the B- and C-modes
 
-## ----eval=TRUE, include=TRUE, fig.width=6, fig.height=7-----------------------
+## ----eval=TRUE, fig.height=7, fig.width=6, warning=FALSE, include=TRUE--------
 # plot components in each sample, residual and whole sample
 eempf_residuals_plot(pf4[[1]], eem_list, select = eem_names(eem_list)[10:14], cores = cores, contour = TRUE)
 
 ## ----eval=FALSE, include=TRUE-------------------------------------------------
 #  #calculate split_half analysis
-#  sh <- splithalf(eem_list_ex, 6, normalise = TRUE, rand = FALSE, cores = cores, nstart = nstart, maxit = maxit, ctol = ctol)
+#  sh <- splithalf(eem_list_ex, 6, normalise = TRUE, rand = FALSE, cores = cores, nstart = nstart, strictly_converging = TRUE, maxit = maxit, ctol = ctol)
 
 ## ----eval=TRUE, include=TRUE, fig.width=7-------------------------------------
 data(sh)
